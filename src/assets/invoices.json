@@ -1,0 +1,26 @@
+[
+    {
+        "invoiceName":"invoice 1",
+        "amountDue": 4400,
+        "dueDate": "8/25/18",
+        "sts": true
+    },
+    {
+        "invoiceName":"invoice 2",
+        "amountDue": 6400,
+        "dueDate": "8/30/18",
+        "sts": false
+    },
+    {
+        "invoiceName":"invoice 3",
+        "amountDue": 5400,
+        "dueDate": "8/28/18",
+        "sts": true
+    },
+    {
+        "invoiceName":"invoice 4",
+        "amountDue": 8400,
+        "dueDate": "9/5/18",
+        "sts": false
+    }
+]

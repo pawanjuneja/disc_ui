@@ -1,0 +1,87 @@
+
+/* ul li {
+    margin: 0px 10px;
+} */
+ /* ul li:hover {
+    background:#008CBA;
+ }
+
+ nav > a:hover {
+     color: #008CBA;
+ } */
+
+ 
+  
+ /* .sm-logo {
+     padding: 3px 10px; 
+  }
+ 
+
+ li > a {
+    background: url('../../../assets/quick-link-sprite.png') no-repeat left top;
+    padding: 17px 6px 17px 45px;
+    line-height: 30px;
+    display: block;
+    color: #fff;
+    opacity: 0.7;
+    font-size: 20px;
+}
+*/
+
+li a.sm-home{
+    /* background: url('../../../assets/quick-link-sprite.png') no-repeat left top; */
+    padding: 17px 6px 17px 45px;
+    line-height: 30px;
+    display: block;
+    color: #fff;
+    opacity: 0.7;
+    font-size: 20px;
+    /* background-position: 0px -105px; */
+}
+
+li a.sm-quality{
+    /* background: url('assets/quick-link-sprite.png') no-repeat left top; */
+    padding: 17px 6px 17px 45px;
+    line-height: 30px;
+    display: block;
+    color: #fff;
+    opacity: 0.7;
+    font-size: 20px;
+    background-position: 0px -105px;
+}
+  
+li a.sm-management{
+    /* background: url('assets/quick-link-sprite.png') no-repeat left top; */
+    padding: 17px 6px 17px 45px;
+    line-height: 30px;
+    display: block;
+    color: #fff;
+    opacity: 0.7;
+    font-size: 20px;
+     background-position: 0px -46px;
+}
+  
+li a.sm-report{
+    /* background: url('assets/quick-link-sprite.png') no-repeat left top; */
+    padding: 17px 6px 17px 45px;
+    line-height: 30px;
+    display: block;
+    color: #fff;
+    opacity: 0.7;
+    font-size: 20px;
+    background-position: 0px 5px;
+}
+
+li a:hover{
+    text-decoration: none;
+    opacity: 1;
+}
+
+a.sub-list span{
+    font-size: 20px;
+} 
+
+a.sub-list i {
+    line-height: 30px;
+    font-size: 30px;
+}
