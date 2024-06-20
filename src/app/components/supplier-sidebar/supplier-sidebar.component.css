@@ -1,0 +1,75 @@
+.li_active {
+    background-color: #3c8dbc;
+}
+
+.a_link :hover {
+    cursor: pointer;
+    background-color: #add8e6;
+}
+
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu>.dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: 0px;
+    margin-left: -1px;
+    -webkit-border-radius: 0 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px;
+    border-radius: 0 6px 6px 6px;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+    display: block;
+}
+
+.dropdown-submenu:hover>a:after {
+    border-left-color: #fff;
+}
+
+.dropdown-submenu.pull-left {
+    float: none;
+}
+
+.dropdown-submenu.pull-left>.dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+    -webkit-border-radius: 6px 0 6px 6px;
+    -moz-border-radius: 6px 0 6px 6px;
+    border-radius: 6px 0 6px 6px;
+}
+
+.isHoverList {
+    padding: 0;
+    border: none;
+}
+
+.isHoverList>li>a {
+    padding: 12px;
+}
+
+.isHoverList>ul>li {
+    background: #fff;
+}
+
+.isHoverList>a:hover {
+    background-color: #add8e6;
+    cursor: pointer;
+}
+
+.isHoverList>li>a:hover {
+    background-color: #add8e6;
+    cursor: pointer;
+}
+
+.bg_w_logo>img {
+    outline: none;
+    cursor: pointer;
+}
+
+.bg_w_logo>img:hover,
+.bg_w_logo>img:focus {
+    outline: none;
+}

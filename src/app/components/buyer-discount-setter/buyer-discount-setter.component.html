@@ -1,0 +1,193 @@
+<div class="wrapper">
+    <app-header title="Supplier Rate Maintenance"></app-header>
+    <buyer-sidebar></buyer-sidebar>
+    <div class="content-wrapper" id="demo1">
+        <section class="content-header">
+            <div *ngIf="errorOccured">
+                <h3 style="color: red">{{errorMessage}}</h3>
+            </div>
+        </section>
+        <section class="content">
+            <div class="row">
+                <section class="col-lg-12 connectedSortable">
+                    <div class="box box-success border-none">
+                        <div class="isCommonScroll">
+                            <div class="box-body table-responsive isGlobalRemoveBorder">
+                                <div class="col-lg-12 f_01 pd_b_10">Input Fields</div>
+                                <div class="box-body table-responsive group2 buyer-descount-setter" style="border: 1px solid #ccc;
+                                border-radius: 10px;
+                                padding-right: 35px;
+                                padding-left: 10px;">
+                                    <table class="table table-hover font_d" width="100%">
+                                        <tbody>
+                                            <tr class="border-none f_1">
+                                                <th class="font_light isHeadingInputList" width="21%">
+                                                    <p _ngcontent-c1=""> Supplier Search <i class="fa fa-fw fa-user"></i></p>
+                                                    <input _ngcontent-c1="" class="form-control" id="" name="" placeholder="Supplier Name" (change)="filterCompanyOffers()" style="border-left-style: none;border-right-style: none;border-top-style: none;color: dodgerblue" type="text" [(ngModel)]="supplierFilterText">
+                                                </th>
+                                                <th class="font_light isHeadingInputList" width="21%">
+                                                    <p _ngcontent-c1=""> Offer Type <i class="fa fa-fw fa-map-marker"></i></p>
+                                                    <select _ngcontent-c1="" class="form-control" id="" aria-placeholder="Select Offer Type" name="dropdownCompanyLocations" [(ngModel)]="selectedOfferTypeFilter" (change)="filterCompanyOffers()" style="border-left-style: none;border-right-style: none;border-top-style: none;color: dodgerblue">
+                                                    <optgroup *ngFor="let offer of lstAllOfferTypes">
+                                                        <option _ngcontent-c1="" class="" value="{{offer.id}}">{{offer.description}}</option>
+                                                    </optgroup>
+                                                </select>
+                                                </th>
+                                                <th class="font_light isHeadingInputList" width="21%">
+                                                    <p _ngcontent-c1="" style="position: relative"> Offer Start Date <i class="fa fa-fw fa-calendar"></i></p>
+                                                    <input _ngcontent-c1="" class="form-control" name="bday" placeholder="dd-MM-yyyy" style="border-left-style: none;border-right-style: none;border-top-style: none;color:dodgerblue; width: 90%" type="date" (change)="filterCompanyOffers()" [(ngModel)]="filterStartDate">
+                                                </th>
+                                                <th class="font_light isHeadingInputList" width="21%">
+                                                    <p _ngcontent-c1="" style="position: relative"> Offer End Date <i class="fa fa-fw fa-calendar"></i></p>
+                                                    <input _ngcontent-c1="" class="form-control" name="bday" placeholder="dd-MM-yyyy" style="border-left-style: none;border-right-style: none;border-top-style: none;color:dodgerblue; width: 90%" type="date" (change)="filterCompanyOffers()" [(ngModel)]="filterEndDate">
+                                                </th>
+                                                <th class="font_light isReferesh" style="text-align: center;vertical-align: bottom;" width="6%">
+                                                    <i class="material-icons" (click)="ngOnInit()" title="Refresh" style="cursor: pointer">refresh</i>
+                                                </th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-lg-12 f_01 pd_b_10 supplierOffer">Supplier Offer Details</div>
+                                <div class="box-body table-responsive table_bg buyer-descount-setter">
+                                    <table class="table table-hover font_d f_1" width="100%">
+                                        <tbody>
+                                            <tr class="border-none">
+                                                <th class="border-none isCommonCenter" width="12%">
+                                                    Supplier Name
+                                                    <span><i class="fa fa-fw fa fa-sort" (click)="sortCompanyOffers('supplier')"></i></span>
+                                                </th>
+                                                <th class="border-none isCommonCenter" width="11%">
+                                                    Offer Type
+                                                    <span><i class="fa fa-fw fa fa-sort" (click)="sortCompanyOffers('offerType')"></i></span>
+                                                </th>
+                                                <th class="border-none issortIcon" width="14%">
+                                                    Constant Percentage
+                                                    <span><i class="fa fa-fw fa fa-sort" (click)="sortCompanyOffers('constantPercentage')"></i></span>
+                                                </th>
+                                                <th class="border-none issortIcon" width="14%">
+                                                    Minimum Percentage
+                                                    <span><i class="fa fa-fw fa fa-sort" (click)="sortCompanyOffers('minPercentage')"></i></span>
+                                                </th>
+                                                <th class="border-none issortIcon" width="14%">
+                                                    Maximum Percentage
+                                                    <span><i class="fa fa-fw fa fa-sort" (click)="sortCompanyOffers('maxPercentage')"></i></span>
+                                                </th>
+                                                <th class="border-none isCommonCenter" width="12.5%">
+                                                    Offer Start Date
+                                                    <span><i class="fa fa-fw fa fa-sort" (click)="sortCompanyOffers('offerStartDate')"></i></span>
+                                                    <p class="isDateFormate">(dd-mm-yyyy)</p>
+                                                </th>
+                                                <th class="border-none isCommonCenter" width="12.5%">
+                                                    Offer End Date
+                                                    <span><i class="fa fa-fw fa fa-sort" (click)="sortCompanyOffers('offerEndDate')"></i></span>
+                                                    <p class="isDateFormate">(dd-mm-yyyy)</p>
+                                                </th>
+                                                <th width="8.5% isCommonCenter">
+                                                    <span class="isbuyercenter">Select All</span>
+                                                    <!-- <input type="checkbox" name="" id="BPU-SA" (change)="selectAllCompanyOffers($event.target.checked)" [(ngModel)]="selectAll" style="margin-left: auto"> -->
+                                                    <ui-switch size="small" defaultBgColor="#f47564" color="rgb(153, 204, 102)" (change)="selectAllCompanyOffers($event)" [(ngModel)]="selectAll" style="margin-left: 5px" class="isUiSift"></ui-switch>
+                                                </th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="box-header table_bg chat no-padding buyer-descount-setter" style="border: 1px solid #ccc;border-top: 0px;border-radius: 0px 0px 10px 10px;" id="supplierTable">
+                                    <div class="box-body table-responsive  ">
+                                        <table class="table table-hover font_d f_1" width="100%" style="border-collapse: separate;">
+                                            <tbody *ngFor="let company of lstCompanies | paginate: { itemsPerPage: 100, currentPage: page }">
+                                                <tr class="b_left_4">
+                                                    <td width="12%" class="border-left-green" title="{{ company.companyName }}">{{company.companyName }}</td>
+                                                    <td width="11%" class="isCommonCenter">{{(company.offerType !== null && company.offerType !== undefined)?company.offerType.description:''}}</td>
+                                                    <td width="14%" class="isCommonCenter"><span *ngIf="company.offerType !== null && company.offerType !== undefined && company.offerType.description==='Fixed'">{{company.constantPercentage | number : '1.2-2'}} <span *ngIf="company.constantPercentage !== null">%</span></span>
+                                                    </td>
+                                                    <td width="14%" class="isCommonCenter">{{company.minPercentage | number : '1.2-2'}} <span *ngIf="company.minPercentage !== null">%</span></td>
+                                                    <td width="14%" class="isCommonCenter">{{company.maxPercentage | number : '1.2-2'}} <span *ngIf="company.maxPercentage !== null">%</span></td>
+                                                    <td width="12.5" class="isCommonCenter">{{company.offerStartDate | date: 'dd-MMM-yyyy'}}</td>
+                                                    <td width="12.5%" class="isCommonCenter">{{company.offerEndDate | date: 'dd-MMM-yyyy'}}</td>
+                                                    <td width="8.5%">
+                                                        <!-- <input type="checkbox" class="isCommonCenter" [checked]="company.selected" [(ngModel)]="company.selected" (change)="selectionChanged($event,company)"> -->
+                                                        <ui-switch size="small" defaultBgColor="#f47564" color="rgb(153, 204, 102)" [(ngModel)]="company.selected" (change)="selectionChanged($event,company)"></ui-switch>
+                                                    </td>
+                                                </tr>
+                                                <tr style="height: 5px"></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <br>
+                                <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section *ngIf="numberOfSelectedSuppliers>0" class="col-lg-12 connectedSortable">
+                    <div class="box box-success border-none">
+                        <div class="box-body table-responsive">
+                            <div class="isCommonScroll">
+                                <div class="col-lg-12 f_01 pd_b_10">Add/Edit Offer Details</div>
+                                <div class="box-body table-responsive group2 buyer-descount-setter" style="border: 1px solid #ccc;
+                              border-radius: 10px;                             
+                              padding-left: 10px;">
+                                    <table class="table table-hover font_d f_1 font_light" width="100%">
+                                        <tbody>
+                                            <tr class="border-none" width="100%">
+                                                <th class="font_light">
+                                                    <p>Offer Type<i class="fa fa-fw fa-map-marker"></i></p>
+                                                    <select *ngIf="numberOfSelectedSuppliers>0" name="dropdownOfferType" id="" class="form-control isCommonRemoveLeftPadding" style="border-left-style: none;border-right-style: none;border-top-style: none;color:dodgerblue;" [(ngModel)]="selectedOfferType"
+                                                        (change)="offerTypeChanged($event.target.value)">
+                                                        <optgroup *ngFor="let offer of lstAllOfferTypes">
+                                                            <option _ngcontent-c1="" class="" value="{{offer.id}}">{{offer.description}}</option>
+                                                        </optgroup>
+                                                        <!-- <option value="Constant">Constant</option>            
+                                                        <option value="Variable">Variable</option>             -->
+                                                    </select>
+                                                </th>
+                                                <th *ngIf="numberOfSelectedSuppliers>0 && offerTypeObj.description=='Fixed'" class="font_light isSinglePercentage">
+                                                    <p>Percentage <small>( Per 30 Days )</small></p>
+                                                    <div class="input-group countPercentage">
+                                                        <input class="input_text_color color_green" type="number" onkeydown="return false" [min]="minPercentage" [max]="maxPercentage" step="0.1" maxlength="1.1" [ngModel]="discountPercentage | number : '1.1-2'" name="discountPercentage" (ngModelChange)="discountPercentage=$event"
+                                                            placeholder="Discount %" style="font-size:20px;border: none" title="Set Discount Percentage">
+                                                        <img src="/src/assets/image/percentage-image.png" />
+                                                    </div>
+                                                </th>
+                                                <th *ngIf="numberOfSelectedSuppliers>0 && offerTypeObj.description=='Variable'" class="font_light isFixedWidth" title="From Original Due Date">
+                                                    <p>Min Percentage</p>
+                                                    <div class="input-group countPercentage">
+                                                        <input class="input_text_color color_green" type="number" onkeydown="return false" [min]="minPercentage" [max]="maxPercentage" step="0.1" maxlength="1.1" [ngModel]="minDiscountPercentage | number : '1.1-2'" name="discountPercentage" (ngModelChange)="minDiscountPercentage=$event"
+                                                            placeholder="Discount %" style="font-size:20px;border: none" title="Set Discount Percentage">
+                                                        <img src="/src/assets/image/percentage-image.png" />
+                                                    </div>
+                                                </th>
+                                                <th *ngIf="numberOfSelectedSuppliers>0 && offerTypeObj.description=='Variable'" class="font_light isFixedWidth" title="To Original Due Date">
+                                                    <p>Max Percentage</p>
+                                                    <div class="input-group countPercentage">
+                                                        <input class="input_text_color color_green" type="number" onkeydown="return false" [min]="minPercentage" [max]="maxPercentage" step="0.1" maxlength="1.1" [ngModel]="maxDiscountPercentage | number : '1.1-2'" (ngModelChange)="maxDiscountPercentage=$event"
+                                                            name="discountPercentage" placeholder="Discount %" style="font-size:20px;border: none" title="Set Discount Percentage">
+                                                        <img src="/src/assets/image/percentage-image.png" />
+                                                    </div>
+                                                </th>
+                                                <th class="font_light isBasedOnCalanderwidth">
+                                                    <p>Start Date (dd-mm-yyyy)</p>
+                                                    <input *ngIf="numberOfSelectedSuppliers>0" class="form-control isCommonDateStyle" type="date" name="startDate" [(ngModel)]="offerStartDate">
+                                                </th>
+                                                <th class="font_light isBasedOnCalanderwidth">
+                                                    <p style="position: relative">End Date (dd-mm-yyyy)</p>
+                                                    <input *ngIf="numberOfSelectedSuppliers>0" class="form-control isCommonDateStyle" type="date" name="endDate" [(ngModel)]="offerEndDate">
+                                                </th>
+                                                <th class="font_light isMeddlebutton">
+                                                    <button *ngIf="numberOfSelectedSuppliers>0" (click)="submitBuyerOffer()" class="btn btn-success" title="Save Offers">Save</button>
+                                                </th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+        <ngx-loading [show]="showWaiting"></ngx-loading>
+    </div>
+    <app-footer></app-footer>

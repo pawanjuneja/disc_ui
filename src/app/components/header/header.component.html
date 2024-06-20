@@ -1,0 +1,79 @@
+<header class="main-header bg_shadow">
+
+    <!-- Logo -->
+    <a class="logo" style="background-color:#e3eaf3"><img src="./assets/image/logo.png" height="40px"></a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top h_20 hov" role="navigation">
+        <!-- Sidebar toggle button-->
+        <div class="isDesktopToggle">
+            <a class="sidebar-toggle gry_color hov" data-toggle="offcanvas" role="button" (click)="toggle()">
+                <span style="padding-left:5px;">Toggle Sidebar</span>                
+            </a>
+           
+        </div>
+        <div class="isPageTitle">
+            <span> {{title}}</span>
+            </div>
+
+        <div class="isMobileToggle">
+            <a class="sidebar-toggle gry_color hov" data-toggle="offcanvas" role="button" (click)="mobileToggle()">
+                <span style="padding-left:5px;" class="mobileToggleMenu">Menu</span>
+            </a>
+        </div>
+
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+              
+                <!-- Notifications: style can be found in dropdown.less -->
+                <li *ngIf="!isSupplier && menuVisible" class=" treeview a_link" routerLink="/supplier-dashboard" routerLinkActive="li_active" [routerLinkActiveOptions]="{exact:true}">
+                    <a class="dropdown-toggle gry_color hov">
+                        <b>Switch to Supplier</b>
+                    </a>
+                </li>
+                <li *ngIf="isSupplier && menuVisible" class=" treeview a_link" routerLink="/buyer-pending-approval" routerLinkActive="li_active" [routerLinkActiveOptions]="{exact:true}">
+                    <a class="dropdown-toggle gry_color hov">
+                        <b>Switch to Buyer</b>
+                    </a>
+                </li>
+                <li class="dropdown notifications-menu">
+                    <a class="dropdown-toggle gry_color hov" data-toggle="dropdown" title="Company Name">
+                        <!-- <i class="fa fa-bell-o"></i>
+            <span class="label label-warning">10</span> -->
+                        <b>{{companyName | uppercase}}</b>
+                    </a>
+                </li>
+                <!-- Tasks: style can be found in dropdown.less -->
+                <li class="dropdown notifications-menu">
+                    <a mat-button [matMenuTriggerFor]="menu" class="dropdown-toggle gry_color hov" data-toggle="dropdown" title="User">
+                      <!-- <i class="fa fa-bell-o"></i>
+                        <span class="label label-warning">10</span> -->
+                        <b>{{username}}</b> <span><i class="fa fa-fw fa-caret-down"></i></span>
+                      </a>
+                    </li>
+                  <mat-menu #menu="matMenu">
+                    <button *ngIf="!isSupplier" mat-menu-item routerLink="/b/buyer-change-password" routerLinkActive="li_active" [routerLinkActiveOptions]="{exact:true}">
+                      <i class="fa fa-fw fa-user"></i> <span> Change Password </span>
+                    </button>
+                    <button *ngIf="isSupplier" mat-menu-item routerLink="/s/change-password" routerLinkActive="li_active" [routerLinkActiveOptions]="{exact:true}">
+                      <i class="fa fa-fw fa-user"></i> <span> Change Password </span>
+                    </button>
+                    <button *ngIf="isAdmin" mat-menu-item routerLink="/user-list" routerLinkActive="li_active" [routerLinkActiveOptions]="{exact:true}">
+                      <i class="fa fa-fw fa-users"></i> <span> Manage Users </span>
+                    </button>
+                    <button mat-menu-item (click)="logout()"><a style="color:black" data-toggle="dropdown">
+                        <i style="color:rgb(234, 104, 90)" class="fa fa-lg fa-power-off"></i> 
+                        <span> Logout </span>
+                      </a> 
+                  </button>
+                  </mat-menu>
+                  
+                <!-- User Account: style can be found in dropdown.less -->
+                <!-- <li class="dropdown user user-menu">
+                    <a class="dropdown-toggle" data-toggle="dropdown" tooltip="Logout" style="color:rgb(234, 104, 90)" (click)="logout()">
+                        <i class="fa fa-lg fa-power-off" aria-hidden="true"></i>
+                    </a>
+                </li> -->
+            </ul>
+        </div>
+    </nav>
+</header>

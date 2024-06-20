@@ -1,0 +1,7 @@
+.hov :hover {
+    cursor: pointer;
+}
+.isPageTitle{
+display: inline-block;
+padding: 15px 15px;
+}

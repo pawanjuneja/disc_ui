@@ -1,0 +1,53 @@
+<div class="wrapper">
+  <app-header></app-header>
+
+  <buyer-sidebar></buyer-sidebar>
+
+    <div class="content-wrapper" id="demo1" style="padding-top: 50px; padding-left: 50px">
+      <div class="col-lg-3 col-sm-12 col-xs-12" title="From Original Due Date">
+          <p>Start Date</p>
+          <input class="form-control" type="date" name="bday" style="border-left-style: none;border-right-style: none;border-top-style: none;color: blue" 
+            [(ngModel)]="fromDate">
+        </div>
+        <div class="col-lg-3 col-sm-12 col-xs-12">
+          <div class="col-lg-10 col-sm-10 col-xs-12" title="To Original Due Date">
+            <p style="position: relative">End Date</p>
+            <input class="form-control" type="date" name="bday" style="border-left-style: none;border-right-style: none;border-top-style: none;color: blue" 
+              [(ngModel)]="toDate" >
+            </div>
+          </div>
+        <div class="col-lg-3 col-sm-12 col-xs-12">
+          <button class="btn btn-success" (click)="fetchBuyerReport()">Fetch Report</button>
+        </div>
+    
+    
+        <!-- <table mat-table [dataSource]="buyerInvoices" class="mat-elevation-z8">
+            <ng-container matColumnDef="invoiceNumber">
+              <th mat-header-cell *matHeaderCellDef> {{invoiceNumber}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.invoiceNumber}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="companyName">
+              <th mat-header-cell *matHeaderCellDef> {{companyName}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.companyName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="submissionDate">
+              <th mat-header-cell *matHeaderCellDef> {{submissionDate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.submissionDate}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="buyerDesc">
+              <th mat-header-cell *matHeaderCellDef> {{buyerDesc}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.buyerDesc}} </td>
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table> -->
+        </div>
+      <!-- <ngx-loading [show]="showWaiting"></ngx-loading> -->
+  <!-- End of Content-wrapper -->
+<!-- <app-footer></app-footer> -->
+</div>
+<!-- End Of Wrapper -->

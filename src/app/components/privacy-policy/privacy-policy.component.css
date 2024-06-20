@@ -1,0 +1,15 @@
+address { 
+    display: block;
+    font-style: italic;
+} 
+.a_link :hover {
+    cursor: pointer;
+}
+a {
+    color: blue;
+}
+.main_body
+{
+    margin: 0px 5px;
+    overflow: auto;
+}

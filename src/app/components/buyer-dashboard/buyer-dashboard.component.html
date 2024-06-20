@@ -1,0 +1,103 @@
+<div class="row">
+
+    <div class="col-md-4">
+      <!--Saving acheived-->
+      <div class="box box-solid box-danger box_shadow h_175" routerLink="/buyer-savings-achieved" routerLinkActive="bg_gry" [routerLinkActiveOptions]={exact:true}>
+  
+        <div class="box-header">
+          <h3 class="box-title">Savings Achieved</h3>
+        </div>
+        <table class='tbl_sec1'>
+          <tr class='tbl_sec1_tr1'>
+            <td class='tbl_sec1_tr1_td1'>
+              Total Savings
+            </td>
+            <td class='tbl_sec1_tr1_td2 f_01'>
+              {{buyerDashboardDto.currencySymbol}} {{buyerDashboardDto.totalSavingsAchievedAmount | number : '1.2-2'}}
+            </td>
+          </tr>
+  
+          <tr class='tbl_sec1_tr1'>
+            <td class='tbl_sec1_tr1_td1'>
+              Average APR
+              <h5 class='tbl_sec1_tr1_h5'>Annualised Percentage Rate</h5>
+            </td>
+            <td class='tbl_sec1_tr1_td2 f_01'>
+              {{(buyerDashboardDto.aprPercentage) | number : '1.2-2'}} %
+              
+            </td>
+          </tr>
+        </table>
+      </div><!-- /.box -->
+      <!--/Saving acheived-->
+    </div><!-- /.col -->
+  
+  
+    <!--starting Box 2--->
+    <div class="col-md-4" style="padding-bottom: 0px;">
+      <!-- Primary box -->
+      <div class="box box-solid box-primary  box_shadow h_175" routerLink="/buyer-pending-approval" routerLinkActive="bg_gry" [routerLinkActiveOptions]={exact:true}>
+        <div class="box-header" style="padding-bottom: 4px;">
+          <h3 class="box-title">In Approval</h3>
+        </div>
+        <div class="box-body ">
+          <table class='tbl_sec1 '>
+            <tr class='tbl_sec1_tr1'>
+              <td class='tbl_sec1_tr1_td1'>
+                Amount Pending for Approval
+              </td>
+              <td class='tbl_sec1_tr1_td2 f_01 amt_pending_appvl border-none'>
+                {{buyerDashboardDto.currencySymbol}} {{buyerDashboardDto.approvalPendingAmount | number : '1.2-2' }}
+              </td>
+            </tr>
+  
+            <tr class='tbl_sec1_tr1'>
+              <td class='tbl_sec1_tr1_td1'>
+                Amount Under Clearing
+                <h5 class='tbl_sec1_tr1_h5' style="margin: 0px;color: white">.</h5>
+              </td>
+              <td class='tbl_sec1_tr1_td2 f_01 amt_pending_appvl border-none'>
+                {{buyerDashboardDto.currencySymbol}} {{buyerDashboardDto.underClearingAmount | number : '1.2-2'}}
+              </td>
+            </tr>
+          </table>
+        </div><!-- /.box-body -->
+      </div><!-- /.box -->
+    </div><!-- /.col -->
+    <!--Ending Box 2--->
+  
+    <!--Starting Box 3--->
+  
+    <div class="col-md-4 ">
+      <!-- Success box -->
+      <div class="box box-solid box-success box_shadow h_175" routerLink="/buyer-account-payable" routerLinkActive="bg_gry" [routerLinkActiveOptions]={exact:true}>
+        <div class="box-header">
+          <h3 class="box-title">Payments Due (Open Invoices)</h3>
+        </div>
+        <!--Payments due--->
+        <table class='tbl_sec1'>
+          <tr class='tbl_sec1_tr1'>
+            <td class='tbl_sec1_tr1_td1'>
+              Total Amount
+            </td>
+            <td class='tbl_sec1_tr1_td2 f_01'>
+              {{buyerDashboardDto.currencySymbol}} {{buyerDashboardDto.openInvoicesTotalAmount | number : '1.2-2'}}
+            </td>
+          </tr>
+  
+          <tr class='tbl_sec1_tr1'>
+            <td class='tbl_sec1_tr1_td1'>
+              WAT
+              <h5 class='tbl_sec1_tr1_h5'>Weighted Average Tenor</h5>
+            </td>
+            <td class='tbl_sec1_tr1_td2 f_01'>
+              {{buyerDashboardDto.watDays | number:'1.0-0'}} Days
+              
+            </td>
+          </tr>
+        </table>
+        <!--/Payments Dues--->
+      </div><!-- /.box -->
+    </div><!-- /.col -->
+    <!---Ending Box 3--->
+  </div>

@@ -1,0 +1,29 @@
+.a_link :hover {
+    cursor: pointer;
+}
+
+.isHeadingInputList>p {
+    padding-left: 15px;
+}
+
+.isDescountAmmount {
+    padding: 0px 7px 0px 7px;
+}
+
+.buyerCurrSymb {
+    padding: 0;
+}
+
+@media only screen and (max-width:767px) {
+    .isFixedwidth {
+        width: 1335px;
+        margin-bottom: 8px !important;
+    }
+    .isFixedwidth1 {
+        width: 1335px;
+    }
+    .isDetailsFixedWidth {
+        padding-right: 0px;
+        width: 1335px;
+    }
+}

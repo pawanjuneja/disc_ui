@@ -1,192 +1,219 @@
-@import "~ng-pick-datetime/assets/style/picker.min.css";
-body{
-    background-color: #f1f1f1;
-}
-.webix_axis_title_y {
-   
-    transform: rotate(-90deg);
-    padding-left: 16px!important;
-    color: black!important;
-    font-size: 25px!important;
-    font-weight: normal!important;
-}
-.webix_axis_item_y, .webix_axis_item_x {
-    color: #4e5358!important;
-    font-weight: normal!important;
-    font-size: 23px!important;
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
 }
 
-.webix_axis_item_y {
-    transform: rotate(71deg) !important;
-    left: 0.5px!important;
-    height: 25px!important;
-    width: 132px!important;
-    text-overflow: ellipsis!important;
-    text-align: center!important;
-}
-
-.mydrp .titleareatxt {
-    font-size: 18px !important;
-    font-weight: bold;
-}
-
-.mydrp .titlearea {
-    padding: 10px 0px;
-}
-
-
-
-
-.month-picker {
-    display: inline-block;
-    position: absolute;
-    z-index: 9999;
-}
-
-.month-picker table {
-  border-collapse: separate;
-  border-spacing: 2px 2px;
-}
-
-.month-picker td {
-    padding: 0px;
-}
-
-/*
-Prevents the button labels from maving sligtly to the left
-when applying the width CSS property to the buttons.
-See: .month-picker-month-table button { width: 4.3em; }
-*/
-.month-picker .ui-button-text {
-  padding: .4em 0;
-}
-
-.month-picker-header {
-    margin: 3px 3px 0px 3px;
-}
-
-.month-picker-year-table {
-    width: 100%;
-    /*
-    Makes sure the next/previous/jump years buttons are not unnecessarily
-    selected if the user clicks them a couple of times fast.
-    */
-    -ms-user-select: none; /* IE 10+ */
-    -moz-user-select: -moz-none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    user-select: none;
-}
-
-/*
-The plugin uses buttons with a transparent background in the year-table
-(aka header) in order to look consistent with jQuery UI datepicker and to
-make the year title a button that blends into the heading in the default state.
-
-The plugin does this by removing the .ui-state-default class from (in MonthPicker.js)
-the a tags (buttons) which also ends up removing the 1px border that it applies.
-
-To prevent the button from resizing and moving everything around when you hover
-in and out, we use a carefully constructed selector, which gets overroden by the
-more specific .ui-state-hover/actove class selectors in the jquery-ui.css
-that apply the visible borders that we want.
-
-This selector applies a 1px transparent border that keeps the button
-in the same size, but it doesen't hide the borders that .ui-state-hover/actove give us.
-*/
-.month-picker-year-table a {
-    border: 1px solid transparent;
-}
-
-/*
-Sets the size of the next/previous buttons,
-and makes the buttons in the heading (year-table) sligtly bigger,
-and removes the pointer cursor from the buttons in the heading (year-table).
-*/
-.month-picker-year-table .ui-button {
-    font-size: 1.1em;
-    width: 1.5em;
-    height: 1.5em;
-    cursor: default;
+body {
     margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-.month-picker-year-table .month-picker-title {
-    text-align: center;
+.switch-small {
+    width: 31px !important;
+    height: 17px !important;
+    border-radius: 20px;
 }
 
-.month-picker-year-table .month-picker-title .ui-button {
-    font-size: 1em;
-    padding: .1em 0;
+.switch-small>small {
+    width: 18px !important;
+    height: 17px !important;
+}
+
+.mat-menu-content {
+    width: 229px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0px;
     width: 100%;
-    font-weight: bold;
 }
 
-/*
-The buttons in the heading (year-table) are slightly shrinked, but because jQuery ui and
-the .month-picker .ui-button-text rule at the top of this CSS file apply some
-padding which results in the button text being moved to the bottom of
-the button.
-
-This rule removes the unnecessary padding so the text in
-the jump years button will be vericaly centred.
-*/
-.month-picker-year-table .ui-button-text {
-    padding: 0;
+.main-sidebar {
+    height: 92.7%;
 }
 
-.month-picker-month-table td {
-    height: 35px;
-    text-align: center;
+.container-fluid {
+    margin-bottom: 48px;
 }
 
-/*
-Makes sure the buttons stay in the same size when swithching
-to the Jump years menu.
-this also ensures that the entire menu dosen't resize itself
-in response to the slightly bigger buttons in the Jump years menu.
- */
-.month-picker-month-table .ui-button {
-    width: 4.2em;
-    margin: .2em;
+@media only screen and (max-width:767px) {
+    .logo {
+        text-align: center !important;
+        background: white !important;
+        height: 75px;
+    }
+    .logo>img {
+        width: 100px;
+        /* width: 155px;
+        height: 95px;
+        padding-top: 5px; */
+    }
+    .mobileToggleMenu {
+        font-size: 16px;
+        font-weight: 600;
+    }
+    .sidebar-toggle {
+        padding: 2px 15px !important;
+    }
+    .tbl_sec1_tr1_h5 {
+        font-size: 14px;
+    }
+    .main-header {
+        min-height: 120px;
+    }
+    .isPageTitle {
+        display: flex !important;
+        justify-content: center;
+        padding: 0px !important;
+        color: dodgerblue;
+        font-size: 20px;
+    }
+    .notifications-menu {
+        padding: 0px !important;
+    }
+    .pd_t_0 {
+        margin-left: 230px !important;
+    }
+    .bg_w_logo {
+        display: none;
+    }
+    .main-sidebar {
+        height: auto;
+        margin-top: 100px;
+        width: 200px;
+        padding-top: 0px !important;
+    }
+    .navbar-nav>li>a {
+        padding-right: 29px;
+    }
+    .isUserName {
+        padding-right: 0 !important;
+        padding-left: 73px !important;
+    }
+    .dropdown-toggle {
+        padding-right: 5px !important;
+        margin-right: 5px;
+        padding-left: 5px !important;
+        padding-top: 5px !important;
+    }
+    .content-header {
+        display: inline-block;
+        padding-top: 10px;
+    }
+    .text-left {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+    .text-left>h4 {
+        font-size: 16px !important;
+    }
+    .isHeadingInputList>p {
+        font-size: 18px;
+    }
+    .isHeadingInputList {
+        text-align: center;
+    }
+    .paymentDate {
+        font-size: 18px !important;
+        margin: 0px;
+    }
+    .isRemovePadding {
+        margin-top: 0px !important;
+    }
+    .countPercentage {
+        display: flex;
+    }
+    .countPercentage>img {
+        right: 101px !important;
+    }
+    .f_17 {
+        font-size: 16px !important;
+    }
+    .f_blue {
+        text-align: center;
+        margin-top: 0px !important;
+        margin-bottom: 7px;
+    }
+    .isalignItem {
+        text-align: center;
+    }
+    .isResposive {
+        margin-bottom: 10px !important;
+        overflow: unset;
+        width: 1120px;
+    }
+    .chat {
+        width: 1120px;
+    }
+    .table_bg {
+        width: 1120px;
+    }
+    .isCommon {
+        font-size: 14px !important;
+    }
+    .ngx-pagination {
+        text-align: center;
+        padding-left: 0px;
+    }
+    .pd_b_10 {
+        text-align: left;
+    }
+    .isCommonScroll {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        overflow: auto;
+    }
+    .table-responsive {
+        overflow: unset;
+    }
+    .isSubmitbtn {
+        width: 100% !important;
+    }
+    .isGlobalRemoveBorder {
+        border: none;
+    }
+    .buyer-descount-setter {
+        width: 400vw;
+    }
+    .isbuyercenter {
+        display: block;
+    }
+    .isUiSift {
+        margin-left: 19px !important;
+    }
+    .isUiSift1 {
+        margin-left: 40px !important;
+    }
+    .isMarginBottom {
+        margin-bottom: 20px !important;
+    }
+    .isReferesh {
+        text-align: left !important;
+    }
+    .supplierOffer {
+        padding-top: 10px;
+    }
+    .isUserListScroll {
+        overflow: scroll;
+    }
+    .user-list-scroll {
+        width: 100%;
+    }
+    .isUiSift2 {
+        margin-left: 9px !important;
+    }
+    .isDesktopToggle {
+        display: none;
+    }
 }
 
-.month-picker-open-button {
-    height: 20px;
-    width: 20px;
-    vertical-align: bottom;
-}
-
-.month-picker-invalid-message {
-    display: none;
-    background-color: Yellow;
-}
-
-.month-picker-disabled {
-    background-color: #e1e1e1;
-}
-
-
-.chart-container {
-	-webkit-animation: animatezoom 1s;
-    animation: animatezoom 1s;
-    border: 1px solid rgba(255,255,255,.2);
-}
-
-@-webkit-keyframes animatezoom {
-	from {-webkit-transform: scale(0)
-}
-
-to {
-	-webkit-transform: scale(1)
-}
-
-}
-@keyframes animatezoom {
-	from {transform: scale(0)
-}
-to {
-	transform: scale(1)
-}
-
+@media only screen and (min-width: 1224px) {
+    /* Styles */
+    .isMobileToggle {
+        display: none;
+    }
 }

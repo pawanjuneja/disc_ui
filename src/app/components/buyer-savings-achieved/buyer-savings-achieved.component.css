@@ -1,0 +1,38 @@
+.a_link :hover {
+    cursor: pointer;
+}
+
+.isHeadingInputList>p {
+    padding-left: 15px;
+}
+
+.isRefereshandGoButton {
+    vertical-align: bottom;
+}
+
+.isRefereshandGoButton>i {
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.isCurrencyStyle {
+    padding: 0px 7px 0px 7px;
+}
+
+.buyerCurrSymb {
+    padding: 0;
+}
+
+@media only screen and (max-width:767px) {
+    .isFixedwidth {
+        width: 1302px;
+        margin-bottom: 8px !important;
+    }
+    .isFixedwidth1 {
+        width: 1302px;
+    }
+    .isDetailsFixedWidth {
+        width: 1302px !important;
+        padding-right: 0px;
+    }
+}

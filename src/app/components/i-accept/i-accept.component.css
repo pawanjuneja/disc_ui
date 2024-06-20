@@ -1,0 +1,14 @@
+a {
+    color: blue
+}
+.a_link :hover {
+    cursor: pointer;
+}
+pre {
+    height:200px;
+    overflow:auto;
+}
+strong{
+    color: dodgerblue;
+    cursor: pointer;
+}

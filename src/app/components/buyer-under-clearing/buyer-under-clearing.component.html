@@ -1,0 +1,498 @@
+<div class="wrapper">
+    <app-header title="Update Approved Invoices"></app-header>
+
+    <buyer-sidebar></buyer-sidebar>
+
+    <div class="content-wrapper" id="demo1">
+        <section class="content-header">
+            <!-- <h1>
+        <small><span style="padding: 4px;border:#3c8dbc 1px solid;border-radius: 8px">In Approval</span></small>
+      </h1> -->
+            <div *ngIf="errorOccured">
+                <h3 style="color: red">{{errorMessage}}</h3>
+            </div>
+            <!-- <ol class="breadcrumb">
+        <li><a class="a_link"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Dashboard</li>
+      </ol> -->
+        </section>
+        <section class="content">
+            <buyer-dashboard [buyerDashboardDto]="buyerDashboardDto"></buyer-dashboard>
+
+
+            <div class="row">
+
+                <div class="col-lg-12 f_01 pd_b_10">Summary</div>
+
+
+                <section>
+                    <div class="col-lg-12 connectedSortable">
+                        <form>
+                            <div class="box box-success border-none">
+                                <div class="box-header">
+                                    <div style="float: left; width: 100%" id="bd_left">
+                                        <div class="col-lg-2 text-center">
+                                            <div class="f_17">Total Invoices</div>
+                                            <span class="f_green">{{totalInvoices | number}}</span>
+                                        </div>
+                                        <div class="col-lg-3 text-center buyerCurrSymb">
+                                            <div class="f_17">Total Amount ({{buyerDashboardDto.currencySymbol}})</div>
+                                            <span class="f_green">{{totalAmount | number:'1.2-2'}}</span>
+                                        </div>
+                                        <div class="col-lg-2 text-center">
+                                            <div class="f_17">Average APR</div>
+                                            <span class="f_green">{{(discountPercent*365/30) | number : '1.2-2'}} %</span>
+                                        </div>
+                                        <div class="col-lg-2 text-center buyerCurrSymb">
+                                            <div class="f_17">Discount Amount ({{buyerDashboardDto.currencySymbol}})</div>
+                                            <span class="f_green">{{disAmount | number : '1.2-2'}}</span>
+                                        </div>
+                                        <div class="col-lg-3 text-center buyerCurrSymbr">
+                                            <div class="f_17">Net Amount ({{buyerDashboardDto.currencySymbol}})</div>
+                                            <span class="f_green">{{netAmount | number:'1.2-2'}}</span>
+                                        </div>
+                                        <!-- <div class="col-lg-2 text-center">
+                      <div class="f_17">Select Action</div>
+                      <select _ngcontent-c1="" class="form-control" id="" name="dropdownCompanyLocations" [(ngModel)]="selectedApprovalOption" 
+                        style="border-left-style: none;border-right-style: none;border-top-style: none;color: dodgerblue; ">
+                          <option _ngcontent-c1="" class="" value="Paid">Paid</option>
+                          <option _ngcontent-c1="" class="" value="Post on ERP">Post on ERP</option>
+                      </select>
+                      <button type="button" class="btn btn-success too_small"  (click)="showConfirmationDialog()">Submit</button>
+                    </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12 f_01 pd_b_10">Take Action</div>
+                <div class="col-lg-12 col-md-12 col-sm-12 connectedSortable">
+                    <div class="box box-success border-none">
+                        <div class="box-header">
+                            <div class="col-lg-3 col-md-3 col-sm-3 ">
+                                <div class="f_17">Select Action</div>
+                                <select class="form-control" name="dropdownCompanyLocations" [(ngModel)]="selectedApprovalOption" style="border-left-style: none;border-right-style: none;border-top-style: none;color: dodgerblue; ">
+                                      <option value="Paid">Paid</option>
+                                      <option value="Post on ERP">Post on ERP</option>
+                                    </select>
+                            </div>
+                            <div class="col-lg-7 col-md-3 col-sm-3">
+                                <div class="f_17">Remarks</div>
+                                <input maxlength="100" class="form-control" name="comments" placeholder="Remarks" style="border-left-style: none;border-right-style: none;border-top-style: none;color: dodgerblue" type="text" [(ngModel)]="comments">
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2">
+                                <div class="isCommnetSubmitButtonverticalCenter">
+                                    <button type="button" class="btn btn-success too_small" (click)="showConfirmationDialog()">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-lg-12 f_01 pd_b_10">Detailed View</div>
+
+
+
+                <section class="col-lg-12 connectedSortable">
+                    <div class="box box-success border-none">
+                        <div class="isCommonScroll">
+                            <div class="box-body table-responsive isGlobalRemoveBorder">
+                                <div class="box-body table-responsive group2 buyer-descount-setter isMarginBottom" style="border: 1px solid #ccc;
+                                border-radius: 10px;
+                                padding-right: 35px;
+                                padding-left: 10px;">
+                                    <table class="table table-hover font_d" width="100%">
+                                        <tbody>
+                                            <tr class="border-none f_1">
+                                                <th class="font_light isHeadingInputList">
+                                                    <p _ngcontent-c1="">Location<i class="fa fa-fw fa-map-marker"></i></p>
+                                                    <select _ngcontent-c1="" class="form-control" id="" name="dropdownCompanyLocations" [(ngModel)]="selectedLocation" (change)="filterInvoiceList()" style="border-left-style: none;border-right-style: none;border-top-style: none;color: dodgerblue">
+                                                        <optgroup *ngFor="let location of lstCompanyLocations">
+                                                            <option _ngcontent-c1="" class="" value="{{location.name}}">{{location.name}}</option>
+                                                        </optgroup>
+                                                    </select>
+                                                </th>
+                                                <th class="font_light isHeadingInputList">
+                                                    <p _ngcontent-c1="">Supplier Search<i class="fa fa-fw fa-user"></i></p>
+                                                    <input _ngcontent-c1="" class="form-control" id="" name="" placeholder="Supplier Name" (change)="filterInvoiceList()" style="border-left-style: none;border-right-style: none;border-top-style: none;color: dodgerblue" type="text" [(ngModel)]="supplierFilterText">
+                                                </th>
+                                                <th class="font_light isHeadingInputList">
+                                                    <p _ngcontent-c1="">Invoice Search<i class="fa fa-fw fa-file"></i></p>
+                                                    <input _ngcontent-c1="" class="form-control" id="" name="" placeholder="Invoice Number" (change)="filterInvoiceList()" style="border-left-style: none;border-right-style: none;border-top-style: none;color: dodgerblue;" type="text" [(ngModel)]="invoiceNumberText">
+                                                </th>
+                                                <th class="font_light isHeadingInputList">
+                                                    <p _ngcontent-c1="" style="position: relative">Submission Date<i class="fa fa-fw fa-calendar"></i>
+                                                        <!-- <span _ngcontent-c1="" class="f_red">({{noOfPendingApprovalInvoices}})</span> -->
+                                                    </p>
+                                                    <input _ngcontent-c1="" class="form-control" name="bday" placeholder="dd-MM-yyyy" style="border-left-style: none;border-right-style: none;border-top-style: none;color:dodgerblue; width: 90%" type="date" (change)="filterInvoiceList()" [(ngModel)]="filterSubmissionDate">
+                                                </th>
+                                                <th class="font_light isReferesh" style="text-align: center !important;vertical-align: bottom;">
+                                                    <!-- <button class="btn btn-success" (click)="ngOnInit()" title="Refresh" style="vertical-align:middle;margin-top: 25px"><i class="fa fa-refresh f_01"></i></button> -->
+                                                    <i class="material-icons" (click)="ngOnInit()" title="Refresh" style="cursor:pointer;padding-top: 25px;">
+                                    refresh
+                                  </i>
+                                                </th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="box-body table-responsive table_bg buyer-descount-setter" style="border: 1px solid #ccc;
+                          border-bottom: 0px;
+                          border-radius: 10px 10px 0 0; padding: 0 26px;padding-left: 11px;">
+                                    <table class="table table-hover font_d f_1" width="100%">
+                                        <tbody>
+                                            <tr class="border-none">
+                                                <th class="border-none" width="11.5%">Supplier <span _ngcontent-c1="">
+                    <i _ngcontent-c1="" class="fa fa-fw fa fa-sort" (click)="sortInvoiceList('Supplier')"></i></span>
+                                                    <div class="isCommon">Invoice</div>
+                                                </th>
+                                                <th class="border-none" width="15%">Original Due Date <span _ngcontent-c1="">
+                    <i _ngcontent-c1="" class="fa fa-fw fa fa-sort" (click)="sortInvoiceList('OriginalDueDate')"></i></span>
+                                                    <div class="isCommon">Submission Date</div>
+                                                </th>
+                                                <th class="border-none" width="15%">
+                                                    New Payment Date <span _ngcontent-c1="">
+                    <i _ngcontent-c1="" class="fa fa-fw fa fa-sort" (click)="sortInvoiceList('PaymentDate')"></i></span>
+                                                    <div class="isCommon">Days Paid Early</div>
+                                                </th>
+                                                <th class="border-none" width="13%">Invoice Amount <span _ngcontent-c1=""><i _ngcontent-c1=""
+                                                                                                 class="fa fa-fw fa fa-sort" (click)="sortInvoiceList('InvoiceAmount')"></i></span></th>
+                                                <th class="border-none" width="12%"><span title="Per 30 Days">Discount %</span> <span _ngcontent-c1=""><i _ngcontent-c1=""
+                                                                                           class="fa fa-fw fa fa-sort" (click)="sortInvoiceList('DiscountPercent')"></i></span>
+                                                    <div class="isCommon">Discount Amount</div>
+                                                </th>
+                                                <th class="border-none" width="11%">Net Amount <span _ngcontent-c1=""><i _ngcontent-c1=""
+                                                                                             class="fa fa-fw fa fa-sort" (click)="sortInvoiceList('NetAmount')"></i></span></th>
+                                                <!-- <th class="border-none" width="12.5%">Status<span _ngcontent-c1=""><i _ngcontent-c1=""
+                                                                                          class="fa fa-fw fa fa-filter" (click)="showStatusFilter()"></i></span><div [ngStyle]="{'display':filterDisplay}">
+                                                                                            <select _ngcontent-c1="" class="form-control" id="" name="dropdownStatusFilter" [(ngModel)]="selectedStatusFilter" (change)="filterInvoiceListWithSelectedStatus()"
+                                                                                            style="border-left-style: none;border-right-style: none;border-top-style: none;color: blue">
+                                                                                            <optgroup *ngFor="let status of lstFilterValues">
+                                                                                                <option _ngcontent-c1="" class="" value="{{status}}">{{status}}</option>
+                                                                                            </optgroup>
+                                                                                          </select></div>
+                    </th> -->
+                                                <th class="border-none" width="12%">
+                                                    <span style="margin-left:20px">
+                        Status
+                      </span>
+                                                    <span _ngcontent-c1="">
+                        <i _ngcontent-c1="" class="fa fa-fw fa fa-filter"></i>
+                      </span>
+                                                    <div>
+                                                        <select _ngcontent-c1="" class="form-control" id="" name="dropdownStatusFilter" [(ngModel)]="selectedStatusFilter" (change)="filterInvoiceList()" style="border:none; background-color:inherit;height:auto">
+                            <optgroup *ngFor="let status of lstFilterValues" style="text-align:left">
+                            <option _ngcontent-c1="" class="" value="{{status}}" title="{{status}}">{{status}}</option>
+                        </optgroup>
+                      </select>
+                                                    </div>
+                                                </th>
+                                                <th class="border-none" width="9.5%" id="sa">
+                                                    <span class="isbuyercenter" style="margin-left:20px">
+                        Select All
+                      </span>
+                                                    <!-- <input type="checkbox" name="" id="BPU-SA" (change)="selectAllInvoices($event.target.checked)"
+                          [(ngModel)]="selectAll"> -->
+                                                    <ui-switch (change)="selectAllInvoices($event)" [(ngModel)]="selectAll" size="small" defaultBgColor="#f47564" color="rgb(153, 204, 102)" style="margin-left:20px" class="isUiSift1"></ui-switch>
+                                                </th>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="box-header table_bg chat no-padding buyer-descount-setter" style="border: 1px solid #ccc;border-top: 0px;border-radius: 0px 0px 10px 10px;" id="invoiceTable">
+                                    <div class="box-body table-responsive ">
+                                        <table class="table table-hover font_d f_1" width="100%" style="border-collapse: separate;">
+                                            <tbody *ngFor="let invoice of lstInvoices | paginate: { itemsPerPage: 100, currentPage: p }">
+                                                <tr class="b_left_4" [ngClass]="invoice.xpdInvoice.selected ? 'whiteBackground': 'greyBackground'" (click)="selectCurrentRow(invoice)">
+                                                    <td width="12.5%" class="border-left-test" [style.border-left-color]="returnStyle(invoice.xpdInvoice.xpdDesc)" title="{{ invoice.xpdInvoice.companyName }}">{{invoice.xpdInvoice.companyName | shortenPipe}}
+                                                        <div title="{{ invoice.xpdInvoice.invoiceNumber }}">{{invoice.xpdInvoice.invoiceNumber | shortenPipe}}</div>
+                                                        <!-- <span *ngIf="invoice.notesSummary != null && invoice.notesSummary !== ''" [title]="invoice.notesSummary" class="fa fa-fw fa-info-circle bg_o_f_w"></span> -->
+                                                        <i *ngIf="invoice.notesSummary != null && invoice.notesSummary !== ''" title="" [popover]="myPopover" popoverOnHover="true" animation="true" class="fa fa-fw fa-info-circle bg_o_f_w"></i>
+                                                        <popover-content #myPopover title="Credit-Debit Note" placement="right" popoverOnHover="true" animation="true" class="text-danger"><span class="text-primary">{{invoice.notesSummary}}</span></popover-content>
+                                                    </td>
+                                                    <td width="14.5%">{{invoice.xpdInvoice.dueDate | date: 'dd-MMM-yyyy'}}
+                                                        <div class="isCommon">{{ invoice.xpdInvoice.submissionDate | date: 'dd-MMM-yyyy' }}</div>
+                                                    </td>
+                                                    <td width="12.5%">{{invoice.xpdInvoice.newDueDate | date: 'dd-MMM-yyyy'}}
+                                                        <div class="isCommon">{{invoice.xpdInvoice.daysRemaining}}</div>
+                                                    </td>
+                                                    <td id="table_last_four_rows" width="13.5%">{{invoice.xpdInvoice.currency}} {{invoice.xpdInvoice.dueAmount | number:'1.2-2'}}</td>
+                                                    <td id="table_last_four_rows" width="12.5%"><span title="Per 30 Days">{{invoice.xpdInvoice.discountPercent30Days | number : '1.2-2'}} %</span>
+                                                        <div class="isCommon">{{invoice.xpdInvoice.currency}} {{invoice.xpdInvoice.discountAmount | number : '1.2-2'}}</div>
+                                                    </td>
+                                                    <td id="table_last_four_rows" width="12.5%">{{invoice.xpdInvoice.currency}} {{invoice.xpdInvoice.netAmount | number:'1.2-2'}}</td>
+                                                    <td id="table_last_four_rows" width="12.5%"><span _ngcontent-c1="" [style.background-color]="returnStyle(invoice.xpdInvoice.xpdDesc)" class="label">{{invoice.xpdInvoice.buyerDesc}}</span></td>
+                                                    <td width="9.5%">
+                                                        <!-- <input type="checkbox" name="" id="" [checked]="invoice.xpdInvoice.selected" [(ngModel)]="invoice.xpdInvoice.selected" (change)="updateDashboardRow()"> -->
+                                                        <ui-switch size="small" defaultBgColor="#f47564" color="rgb(153, 204, 102)" [(ngModel)]="invoice.xpdInvoice.selected" [checked]="invoice.xpdInvoice.selected" (change)="selectCurrentInvoice($event, invoice)" style="margin-left:18px"></ui-switch>
+                                                    </td>
+
+                                                </tr>
+                                                <tr style="height: 5px"></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <br>
+                                <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </div>
+
+    <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':paidInvoicesConfirmationModel}">
+        <!-- modal-dialog -->
+        <div class="modal-dialog" role="document">
+            <!-- modal-content -->
+            <div class="modal-content">
+                <!-- modal-header -->
+                <div class="modal-header">
+                    <button type="button" class="close btn btn-danger" aria-label="Close" (click)="closePaidInvoicesModel()"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" style="color:limegreen; font-size: 16px">Confirm Action: PAID INVOICES</h4>
+                </div>
+                <!-- modal-body -->
+                <div class="modal-body">
+                    <div>
+                        <div><span style="color:dodgerblue" class="f_01">Mark {{totalInvoices | number}} invoice(s)? Paid</span>
+                            <br><br>
+                            <table class="table table-bordered f_1">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <td scope="row"><b>Total Invoices</b></td>
+                                        <td scope="row"><b>Total Amount ({{buyerDashboardDto.currencySymbol}})</b></td>
+                                        <td scope="row"><b>Discount Amount ({{buyerDashboardDto.currencySymbol}})</b></td>
+                                        <td scope="row"><b>Net Amount ({{buyerDashboardDto.currencySymbol}})</b></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td scope="row">
+                                            {{totalInvoices | number}}
+                                        </td>
+                                        <td scope="row">
+                                            {{totalAmount | number : '1.2-2'}}
+                                        </td>
+                                        <td scope="row">
+                                            {{disAmount | number : '1.2-2'}}
+                                        </td>
+                                        <td scope="row">
+                                            {{netAmount | number : '1.2-2'}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-success" (click)="payInvoices()">OK</button> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-success" (click)="closePaidInvoicesModel()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':postOnERPInvoicesConfirmationModel}">
+        <!-- modal-dialog -->
+        <div class="modal-dialog" role="document">
+            <!-- modal-content -->
+            <div class="modal-content">
+                <!-- modal-header -->
+                <div class="modal-header">
+                    <button type="button" class="close btn btn-danger" aria-label="Close" (click)="closePostOnERPConfirmationDialog()"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" style="color:limegreen; font-size: 16px">Confirm Action: POST ON ERP</h4>
+                </div>
+                <!-- modal-body -->
+                <div class="modal-body">
+                    <div>
+                        <div><span style="color:dodgerblue" class="f_01">Mark {{totalInvoices | number}} invoice(s)? Posted on ERP</span>
+                            <br><br>
+                            <table class="table table-bordered f_1">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <td scope="row"><b>Total Invoices</b></td>
+                                        <td scope="row"><b>Total Amount ({{buyerDashboardDto.currencySymbol}})</b></td>
+                                        <td scope="row"><b>Discount Amount ({{buyerDashboardDto.currencySymbol}})</b></td>
+                                        <td scope="row"><b>Net Amount ({{buyerDashboardDto.currencySymbol}})</b></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td scope="row">
+                                            {{totalInvoices | number}}
+                                        </td>
+                                        <td scope="row">
+                                            {{totalAmount | number : '1.2-2'}}
+                                        </td>
+                                        <td scope="row">
+                                            {{disAmount | number : '1.2-2'}}
+                                        </td>
+                                        <td scope="row">
+                                            {{netAmount | number : '1.2-2'}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-success" (click)="postOnERP()">OK</button> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-success" (click)="closePostOnERPConfirmationDialog()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':feedbackModalDisplay}">
+        <!-- modal-dialog -->
+        <div class="modal-dialog" role="document">
+            <!-- modal-content -->
+            <div class="modal-content">
+                <!-- modal-header -->
+                <div class="modal-header">
+                    <button type="button" class="close" aria-label="Close" (click)="closeFeedbackDialog()"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" style="color:limegreen; font-size: 16px">Summary - {{approveRejectInvoices}} Invoices</h4>
+                </div>
+
+                <!-- modal-body -->
+                <div class="modal-body" style="height: 80px;overflow: auto">
+                    <p>Thank you. Your action has been processed successfully on {{lstSelectedInvoices.length}} invoice(s).</p>
+                </div>
+                <div style="padding-left: 10px; padding-bottom: 10px">
+                    <button type="button" class="btn btn-success" (click)="closeFeedbackDialog()">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Generic Confirmation Dialog Box starts -->
+    <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':confirmationModel}">
+        <!-- modal-dialog -->
+        <div class="modal-dialog" role="document">
+            <!-- modal-content -->
+            <div class="modal-content">
+                <!-- modal-header -->
+                <div class="modal-header">
+                    <button type="button" class="close btn btn-danger" aria-label="Close" (click)="closeConfirmationDialog()"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" style="color:limegreen; font-size: 16px">Confirm Action<span *ngIf="currentAction !== ''">: {{currentAction}}</span></h4>
+                </div>
+                <!-- modal-body -->
+                <div class="modal-body">
+                    <div>
+                        <div><span style="color:dodgerblue" class="f_01">Process {{totalInvoices | number}} invoice(s) <span *ngIf="currentAction !== ''">to {{ currentAction }}</span></span>
+                            <div>Summary</div>
+                            <table class="table table-bordered f_1">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <td scope="row"><b>Total Invoices</b></td>
+                                        <td scope="row"><b>Total Amount ({{buyerDashboardDto.currencySymbol}})</b></td>
+                                        <td scope="row"><b>Discount Amount ({{buyerDashboardDto.currencySymbol}})</b></td>
+                                        <td scope="row"><b>Net Amount ({{buyerDashboardDto.currencySymbol}})</b></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td scope="row">
+                                            {{totalInvoices | number}}
+                                        </td>
+                                        <td scope="row">
+                                            {{totalAmount | number : '1.2-2'}}
+                                        </td>
+                                        <td scope="row">
+                                            {{disAmount | number : '1.2-2'}}
+                                        </td>
+                                        <td scope="row">
+                                            {{netAmount | number : '1.2-2'}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div>Detail Invoices</div>
+                            <table class="table table-bordered f_1">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <td scope="row"><b>Invoice</b></td>
+                                        <td scope="row"><b>Total Amount ({{buyerDashboardDto.currencySymbol}})</b></td>
+                                        <td scope="row"><b>Discount Amount ({{buyerDashboardDto.currencySymbol}})</b></td>
+                                        <td scope="row"><b>Net Amount ({{buyerDashboardDto.currencySymbol}})</b></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let invoice of confirmationSelectedInvocies">
+                                        <td scope="row" title="{{invoice.invoiceNumber}}">
+                                            {{invoice.invoiceNumber | shortenPipe}}
+                                        </td>
+                                        <td scope="row">
+                                            {{invoice.dueAmount | number : '1.2-2'}}
+                                        </td>
+                                        <td scope="row">
+                                            {{invoice.discountAmount | number : '1.2-2'}}
+                                        </td>
+                                        <td scope="row">
+                                            {{invoice.netAmount | number : '1.2-2'}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <h4>User Comments: {{comments}}</h4>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-success" (click)="createOTPToUpdateInvoices()">OK</button> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-success" (click)="closeConfirmationDialog()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Confirmation Dialog Box ends -->
+
+    <!-- OTP Dialog Box starts -->
+    <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':modelDisplay}">
+        <!-- modal-dialog -->
+        <div class="modal-dialog" role="document">
+            <!-- modal-content -->
+            <div class="modal-content">
+                <!-- modal-header -->
+                <div class="modal-header">
+                    <button type="button" class="close btn btn-danger" aria-label="Close" (click)="closeModalDialog()"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" style="color:limegreen; font-size: 16px">OTP Verification</h4>
+                </div>
+
+                <!-- modal-body -->
+                <div class="modal-body">
+                    <div *ngIf="incorrectOtp">
+                        <h5 style="color: red">{{otpErrorMessage}}. Please click <span style="cursor: pointer;" (click)="createOTPToUpdateInvoices()"><u>here</u></span> to generate again</h5>
+                    </div>
+                    <div>
+                        <div class="f_blue">OTP sent on registered Email Id and Mobile Number.<br> Please enter OTP to update invoice(s)</div>
+                    </div>
+                    <div>
+                        <input type="text" placeholder="Enter OTP" [(ngModel)]="otp" /><br />
+                        <button type="button" class="btn btn-success" (click)="checkOTPAndUpdateInvoices()">Submit</button> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-success" (click)="closeModalDialog()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- OTP Dialog Box ends -->
+
+
+    <ngx-loading [show]="showWaiting"></ngx-loading>
+    <!-- End of Content-wrapper -->
+    <app-footer></app-footer>
+</div>
+<!-- End Of Wrapper -->

@@ -1,0 +1,180 @@
+<div class="wrapper">
+    <app-header title="Payments Due (Open Invoices)"></app-header>
+
+    <buyer-sidebar></buyer-sidebar>
+
+    <div class="content-wrapper" id="demo1">
+        <section class="content-header">
+            <!-- <h1>
+        <small><span style="padding: 4px;border:#00a65a 1px solid;border-radius: 8px">Payments Due (Open Invoices)</span></small>
+      </h1> -->
+            <!-- <span class="f_01 pd_b_10">Payments Due (Open Invoices)</span> -->
+            <div *ngIf="errorOccured">
+                <h3 style="color: red">{{errorMessage}}</h3>
+            </div>
+            <!-- <ol class="breadcrumb">
+        <li><a class="a_link"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Dashboard</li>
+      </ol> -->
+        </section>
+
+
+        <section class="content">
+            <!-- Buyer Dashboard Component Here....! -->
+            <buyer-dashboard [buyerDashboardDto]="buyerDashboardDto"></buyer-dashboard>
+
+            <div class="row">
+
+                <div class="col-lg-12 f_01 pd_b_10">Summary</div>
+
+
+                <section>
+                    <div class="col-lg-12 connectedSortable">
+                        <form>
+                            <div class="box box-success border-none">
+                                <div class="box-header">
+                                    <div style="float: left; width: 100%" id="bd_left">
+                                        <div class="col-lg-3 text-center">
+                                            <div class="f_17">Total Suppliers</div>
+                                            <span class="f_green">{{totalSupplier}}</span>
+                                        </div>
+                                        <div class="col-lg-3 text-center">
+                                            <div class="f_17">Total Invoices</div>
+                                            <span class="f_green">{{totalInvoices}}</span>
+                                        </div>
+                                        <div class="col-lg-3 text-center">
+                                            <div class="f_17">WAT</div>
+                                            <span class="f_green">{{watDays | number: '1.0-0'}} <small>Days</small></span>
+                                        </div>
+                                        <div class="col-lg-3 text-center">
+                                            <div class="f_17">Total Amount ({{buyerDashboardDto.currencySymbol}})</div>
+                                            <span class="f_green">{{totalAmount | number: '1.2-2'}}</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+            <div class="row">
+
+                <div class="col-lg-12 f_01 pd_b_10">Detailed View</div>
+
+
+
+                <section class="col-lg-12 connectedSortable">
+                    <div class="box box-success border-none">
+                        <div class="box-body table-responsive">
+                            <div class="isCommonScroll">
+                                <div class="box-body table-responsive group2 isFixedwidth" style="border: 1px solid #ccc;
+                border-radius: 10px;
+                padding-right: 35px;
+                padding-left: 10px;">
+                                    <table class="table table-hover font_d f_1 font_light" width="100%">
+                                        <tbody>
+                                            <tr class="border-none">
+                                                <th class="font_light isHeadingInputList">
+                                                    <p>Location<i class="fa fa-fw fa-map-marker"></i></p>
+                                                    <select name="dropdownCompanyLocations" id="" class="form-control" [(ngModel)]="selectedLocation" (change)="filterInvoiceList()" style="border-left-style: none;border-right-style: none;border-top-style: none;color:dodgerblue;">
+                                    <optgroup *ngFor="let location of lstCompanyLocations">
+                                        <option value="{{location.name}}">{{location.name}}</option>
+                                    </optgroup>
+                                </select>
+                                                </th>
+                                                <th class="font_light isHeadingInputList">
+                                                    <p>Supplier Search<i class="fa fa-fw fa-user"></i></p>
+                                                    <input type="text" name="" placeholder="Supplier Name" id="" class="form-control" style="border-left-style: none;border-right-style: none;border-top-style: none;color:dodgerblue;" (change)="filterInvoiceList()" [(ngModel)]="supplierFilterText">
+                                                </th>
+                                                <th class="font_light isHeadingInputList">
+                                                    <p>Invoice Search<i class="fa fa-fw fa-file"></i></p>
+                                                    <input type="text" name="" placeholder="Invoice Number" id="" class="form-control" style="border-left-style: none;border-right-style: none;border-top-style: none;color:dodgerblue;" (change)="filterInvoiceList()" [(ngModel)]="invoiceNumberText">
+                                                </th>
+                                                <th class="font_light isHeadingInputList" title="From Original Due Date">
+                                                    <p>Start Date<i class="fa fa-fw fa-calendar"></i></p>
+                                                    <input class="form-control" type="date" name="bday" style="border-left-style: none;border-right-style: none;border-top-style: none;color:dodgerblue;" [(ngModel)]="filterStartDate" (change)="filterInvoiceList()">
+                                                </th>
+                                                <th class="font_light isHeadingInputList" title="To Original Due Date">
+                                                    <p style="position: relative">End Date<i class="fa fa-fw fa-calendar"></i></p>
+                                                    <input class="form-control" type="date" name="bday" style="border-left-style: none;border-right-style: none;border-top-style: none;color:dodgerblue;" [(ngModel)]="filterEndDate" (change)="filterInvoiceList()">
+                                                </th>
+                                                <th class="font_light" style="vertical-align: bottom">
+                                                    <!-- <button class="btn btn-success" (click)="ngOnInit()" title="Refresh" style="vertical-align:middle;margin-top: 25px"><i class="fa fa-refresh f_01"></i></button> -->
+                                                    <i class="material-icons" (click)="ngOnInit()" title="Refresh" style="cursor:pointer;">
+                                      refresh
+                                    </i>
+                                                </th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="box-body table-responsive table_bg" style="border: 1px solid #ccc;
+                          border-bottom: 0px;
+                          border-radius: 10px 10px 0 0;
+                          padding-right: 30px
+                          ">
+                                    <table class="table table-hover font_d f_1" width="100%">
+                                        <tbody>
+                                            <tr class="border-none">
+                                                <th class="border-none" width="16.6%">Supplier<span _ngcontent-c1="">
+                    <i _ngcontent-c1="" class="fa fa-fw fa fa-sort" (click)="sortInvoiceList('Supplier')"></i></span>
+                                                    <div class="isCommon">Location</div>
+                                                </th>
+                                                <th class="border-none" width="16.6%">Invoice <span _ngcontent-c1="">
+                    <i _ngcontent-c1="" class="fa fa-fw fa fa-sort" (click)="sortInvoiceList('InvoiceNumber')"></i></span></th>
+                                                <th class="border-none" width="16.6%">Invoice Date <span _ngcontent-c1="">
+                    <i _ngcontent-c1="" class="fa fa-fw fa fa-sort" (click)="sortInvoiceList('InvoiceDate')"></i></span></th>
+                                                <th class="border-none" width="16.6%">
+                                                    Original Due Date <span _ngcontent-c1="">
+                    <i _ngcontent-c1="" class="fa fa-fw fa fa-sort" (click)="sortInvoiceList('OriginalDueDate')"></i></span>
+                                                </th>
+                                                <th class="border-none" width="16.6%">Days Remaining <span _ngcontent-c1=""><i _ngcontent-c1=""
+                                                                                                   class="fa fa-fw fa fa-sort" (click)="sortInvoiceList('DaysRemaining')"></i></span></th>
+                                                <th class="border-none" width="16.6%">Invoice Amount<span _ngcontent-c1=""><i _ngcontent-c1=""
+                                                                                              class="fa fa-fw fa fa-sort" (click)="sortInvoiceList('InvoiceAmount')"></i></span></th>
+
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="box-header table_bg chat no-padding" style="border: 1px solid #ccc;border-top: 0px;border-radius: 0px 0px 10px 10px;" id="invoiceTable">
+                                    <div class="box-body table-responsive ">
+                                        <table class="table table-hover font_d f_1" width="100%" style="border-collapse: separate;">
+                                            <tbody *ngFor="let invoice of lstInvoices | paginate: { itemsPerPage: 100, currentPage: p }">
+                                                <tr class="b_left_4">
+                                                    <td width="16.6%" class="border-left-test" [style.border-left-color]="getStyle()" title="{{invoice.xpdInvoice.companyName}}">{{invoice.xpdInvoice.companyName | shortenPipe}}
+                                                        <div title="{{invoice.xpdInvoice.orgMasterName}}" class="isCommon">{{invoice.xpdInvoice.orgMasterName | shortenPipe}}</div>
+                                                    </td>
+                                                    <td width="16.6%" title="{{ invoice.xpdInvoice.invoiceNumber }}">{{invoice.xpdInvoice.invoiceNumber | shortenPipe}}
+                                                        <!-- <span *ngIf="invoice.notesSummary != null && invoice.notesSummary !== ''" [title]="invoice.notesSummary" class="fa fa-fw fa-info-circle bg_o_f_w"></span> -->
+                                                        <i *ngIf="invoice.notesSummary != null && invoice.notesSummary !== ''" title="" [popover]="myPopover" popoverOnHover="true" animation="true" class="fa fa-fw fa-info-circle bg_o_f_w"></i>
+                                                        <popover-content #myPopover title="Credit-Debit Note" placement="right" popoverOnHover="true" animation="true" class="text-danger"><span class="text-primary">{{invoice.notesSummary}}</span></popover-content>
+                                                    </td>
+                                                    <td width="16.6%">{{invoice.xpdInvoice.invoiceDate | date:'dd-MMM-yyyy'}}
+                                                    </td>
+                                                    <td width="16.6%">{{invoice.xpdInvoice.dueDate | date:'dd-MMM-yyyy'}}</td>
+                                                    <td width="16.6%">{{invoice.daysRemaining}}</td>
+                                                    <td width="16.6%">{{invoice.xpdInvoice.currency}} {{invoice.actualAmountDue | number : '1.2-2'}}</td>
+
+                                                </tr>
+                                                <tr style="height: 5px"></tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </div>
+    <ngx-loading [show]="showWaiting"></ngx-loading>
+    <app-footer></app-footer>
+
+</div>

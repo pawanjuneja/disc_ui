@@ -1,0 +1,81 @@
+<div class="wrapper">
+  <app-header title="Set Payment Dates"></app-header>
+
+  <buyer-sidebar></buyer-sidebar>
+
+  <div class="content-wrapper" id="demo1">
+    <section class="content-header">
+      <div *ngIf="errorOccured">
+        <h3 style="color: red">{{errorMessage}}</h3>
+      </div>
+    </section>
+    <section class="content">
+      
+      <!-- <buyer-dashboard [buyerDashboardDto]="buyerDashboardDto"></buyer-dashboard> -->
+      <div class="row">
+        <div style="width: 40%; padding-left: 50px">
+          Select Company
+        </div>
+        <div style="width: 40%; padding-left: 50px">
+          <select _ngcontent-c1="" class="form-control" id="" name="dropdownCompanies" [(ngModel)]="selectedCompany" (change)="selectCompanyStrategy()"
+            style="border-left-style: none;border-right-style: none;border-top-style: none;color: dodgerblue">
+            <optgroup *ngFor="let company of lstCompanies">
+                <option _ngcontent-c1="" class="" value="{{company.id}}">{{company.companyName}}</option>
+            </optgroup>
+          </select>
+        </div>
+
+      </div>
+        <div *ngIf="selectedCompany" style="width: 40%; padding-left: 50px" class="box-body table-responsive">
+          Select Payment Date Strategy      
+          <select _ngcontent-c1="" class="form-control" id="" name="dropdownStrategy" [(ngModel)]="selectedStrategy" 
+            style="border-left-style: none;border-right-style: none;border-top-style: none;color: dodgerblue">
+            <option _ngcontent-c1="" class="" value="DayOfWeek">Day of Week</option>
+            <option _ngcontent-c1="" class="" value="SpecifiedDays">Add Specified Days</option>
+          </select>
+          <br />
+          Select Minimum Days
+          <input style="width: 50px" [(ngModel)]="minimumDaysGap" 
+            type="number" name="minimumDaysGap" min="2" />
+          <br />
+          Day of Week
+          <select multiple [disabled]="selectedStrategy=='SpecifiedDays'" _ngcontent-c1="" class="form-control" id="" name="dropdownWeekday" [(ngModel)]="selectedDayOfWeek" 
+            style="padding-top: 30px;border-left-style: none;border-right-style: none;border-top-style: none;color: dodgerblue">
+            <option _ngcontent-c1="" class="" value="2">Monday</option>
+            <option _ngcontent-c1="" class="" value="3">Tuesday</option>
+            <option _ngcontent-c1="" class="" value="4">Wednesday</option>
+            <option _ngcontent-c1="" class="" value="5">Thursday</option>
+            <option _ngcontent-c1="" class="" value="6">Friday</option>
+            <option _ngcontent-c1="" class="" value="7">Saturday</option>
+            <option _ngcontent-c1="" class="" value="1">Sunday</option>
+          </select>
+          <br /><br />
+          Working Days
+          <br /><br />
+          Monday
+          <input type="checkbox" [(ngModel)]="weekDays[1]" />
+          Tuesday
+          <input type="checkbox" [(ngModel)]="weekDays[2]" />
+          Wednesday
+          <input type="checkbox" [(ngModel)]="weekDays[3]" />
+          Thursday
+          <input type="checkbox" [(ngModel)]="weekDays[4]" />
+          Friday
+          <input type="checkbox" [(ngModel)]="weekDays[5]" />
+          Saturday
+          <input type="checkbox" [(ngModel)]="weekDays[6]" />
+          Sunday`
+          <input type="checkbox" [(ngModel)]="weekDays[0]" />
+          <div style="padding-top: 30px">
+            <button class="btn btn-success" (click) = "saveStrategy()">Submit</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-success" (click) = "reset()">Reset</button>
+          </div>
+          </div> 
+          
+      </section>
+
+   
+    <ngx-loading [show]="showWaiting"></ngx-loading>
+  </div>
+<app-footer></app-footer>

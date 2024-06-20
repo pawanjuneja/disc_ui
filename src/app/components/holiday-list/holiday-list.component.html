@@ -1,0 +1,157 @@
+<div class="wrapper">
+    <app-header title="Holiday List"></app-header>
+
+    <buyer-sidebar></buyer-sidebar>
+
+    <div class="content-wrapper" id="demo1">
+        <section class="content-header">
+            <div *ngIf="errorOccured">
+                <h3 style="color: red">{{errorMessage}}</h3>
+            </div>
+        </section>
+        <section class="content">
+
+            <!-- <buyer-dashboard [buyerDashboardDto]="buyerDashboardDto"></buyer-dashboard> -->
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="col-md-4 col-sm-4 isCommonRemoveLeftPadding">
+                        <div class="isSelectCompany">
+                            <h4>Select Company</h4>
+                        </div>
+                        <select class="form-control isSelectOption" name="dropdownCompanies" [(ngModel)]="selectedCompany" (change)="selectCompanyHolidays()">
+                          <optgroup *ngFor="let company of lstCompanies">
+                            <option value="{{company.id}}">{{company.companyName}}</option>
+                          </optgroup>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 isCommonRemoveLeftRightPadding">
+                    <div class="box-body table-responsive">
+                        <div class="box-body table-responsive table_bg" style="border: 1px solid #ccc;
+                          border-bottom: 0px;
+                          border-radius: 10px 10px 0 0;
+                          padding-right: 30px;
+                          ">
+                            <table class="table table-hover font_d f_1" width="100%">
+                                <tbody>
+                                    <tr class="border-none">
+                                        <th class="border-none" width="15%">Holiday description <span _ngcontent-c1="">
+                    <i _ngcontent-c1="" class="fa fa-fw fa fa-sort" ></i></span></th>
+                                        <th class="border-none" width="11%">Holiday Date <span _ngcontent-c1="">
+                    <i _ngcontent-c1="" class="fa fa-fw fa fa-sort" ></i></span></th>
+                                        <th class="border-none" width="12.5%">National Holiday <span _ngcontent-c1="">
+                    <i _ngcontent-c1="" class="fa fa-fw fa fa-sort" ></i></span></th>
+                                        <th class="border-none" width="12.5%">Location <span _ngcontent-c1="">
+                        <i _ngcontent-c1="" class="fa fa-fw fa fa-sort" ></i></span></th>
+                                        <th class="border-none" width="10%">Select <span _ngcontent-c1="">
+                        <i _ngcontent-c1="" class="fa fa-fw fa fa-sort" ></i></span></th>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="box-header table_bg chat no-padding" style="border: 1px solid #ccc;border-top: 0px;border-radius: 0px 0px 10px 10px;" id="invoiceTable">
+                            <div class="box-body table-responsive  ">
+                                <table class="table table-hover font_d f_1" width="100%" style="border-collapse: separate;">
+                                    <tbody *ngFor="let holiday of lstHolidays">
+                                        <tr class="b_left_4">
+                                            <td width="15%" class="border-left-green">{{holiday.holidayDescription }}</td>
+                                            <td width="11%">{{holiday.holidayDate | date: 'dd-MMM-yyyy'}}</td>
+                                            <td width="12.5%">{{(holiday.isNationalHoliday)?'Yes':'No'}} </td>
+                                            <td width="12.5%"> <span *ngFor="let loc of holiday.locations">{{loc.name}}, </span> </td>
+                                            <td width="10%">
+                                                <div>
+                                                    <input #dash type="checkbox" [(ngModel)]="holiday.selected" style="height:13px">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr style="height: 5px"></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <br>
+
+                    </div>
+                </div>
+            </div>
+            <div class="box box-success border-none">
+                <div class="box-header">
+                    <div class=" pd_t_15">
+                        <div *ngIf="listMode" class="col-lg-1" style="text-align:left;margin-top: 5px">
+                            <div class="group" style="text-align:center">
+                                <button [disabled]="selectedCompany===''" class="btn btn-success" style="width:110%;font-size: 18px" (click)="addNewHoliday()">Add</button>
+                            </div>
+
+                        </div>
+                        <div *ngIf="listMode" class="col-lg-1" style="text-align:left;margin-top: 5px">
+                            <div class="group" style="text-align:center">
+                                <button [disabled]="selectedCompany===''" class="btn btn-success" style="width:110%;font-size: 18px" (click)="editSelectedHoliday()">Edit</button>
+                            </div>
+
+                        </div>
+                        <div *ngIf="listMode" class="col-lg-1" style="text-align:left;margin-top: 5px">
+
+                            <div class="group" style="text-align:center">
+                                <button [disabled]="selectedCompany===''" class="btn btn-success" style="width:110%;font-size: 18px" (click)="deleteSelectedHolidays()">Remove</button>
+                            </div>
+
+                        </div>
+
+                        <div *ngIf="!listMode" class="col-lg-1" style="text-align:left;margin-top: 5px">
+
+                            <div class="group" style="text-align:center">
+                                <button class="btn btn-success" style="width:110%;font-size: 18px" (click)="saveHoliday()">Submit</button>
+                            </div>
+
+                        </div>
+
+
+                        <div *ngIf="!listMode" class="col-lg-1" style="text-align:left;margin-top: 5px">
+
+                            <div class="group" style="text-align:center">
+                                <button class="btn btn-success" style="width:110%;font-size: 18px" (click)="listMode=!listMode">Cancel</button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div *ngIf="!listMode" style="width: 40%; padding-top: 50px; padding-left: 50px" class="form-group">
+                    <div>
+                        Holiday Description
+                        <input type="text" [(ngModel)]="selectedHoliday.holidayDescription" name="holidayDate" class="form-control" id="name" required>
+                    </div>
+
+                    <div style="padding-top: 30px">
+                        Holiday Date
+                        <input class="form-control" type="date" name="holidayDate" style="border-left-style: none;border-right-style: none;border-top-style: none;color:dodgerblue;" [(ngModel)]="selectedHoliday.holidayDate" required>
+                    </div>
+                    <div style="padding-top: 30px">
+                        National Holiday
+                        <input type="checkbox" [(ngModel)]="selectedHoliday.isNationalHoliday" required>
+                    </div>
+
+                    <div style="padding-top: 30px">
+                        Select Locations
+                        <select [disabled]="selectedHoliday.isNationalHoliday" multiple _ngcontent-c1="" class="form-control" id="" name="dropdownCompanyLocations" style="height: 200px;border-left-style: none;border-right-style: none;border-top-style: none;color: dodgerblue"
+                            [(ngModel)]="selectedLocations">
+                      <optgroup *ngFor="let orgMaster of selectedCompanyObject.orgMasters">
+                          <option _ngcontent-c1="" class="" value="{{orgMaster.id}}" selected>{{orgMaster.name}}</option>
+                      </optgroup>
+                    </select>
+                    </div>
+
+                    <!-- <button class="btn btn-success" (click) = "saveHoliday()">Submit</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button class="btn btn-success" (click) = "listMode=!listMode">Cancel</button> -->
+                </div>
+            </div>
+        </section>
+
+
+        <ngx-loading [show]="showWaiting"></ngx-loading>
+    </div>
+    <app-footer></app-footer>

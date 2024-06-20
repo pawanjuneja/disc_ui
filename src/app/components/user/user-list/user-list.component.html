@@ -1,0 +1,160 @@
+<div class="wrapper">
+    <app-header title="User List"></app-header>
+    <buyer-sidebar></buyer-sidebar>
+
+    <div class="content-wrapper" id="demo1">
+        <section class="content-header user-list-scroll">
+            <div *ngIf="errorOccured">
+                <h3 style="color: red">{{errorMessage}}</h3>
+            </div>
+
+            <div class="col-md-12 col-sm-12 box-body isCommonTableStyle commonmargin">
+                    <table class="table table-hover font_d" width="100%">
+                            <tbody>
+                                <tr class="border-none f_1">
+                                    <th class="font_light isHeadingInputList">
+                                        <p _ngcontent-c1="">Email<i class="fa fa-fw fa-user"></i></p>
+                                        <input _ngcontent-c1="" class="form-control" id="" name="" placeholder="Enter Email" (change)="filterInvoiceList()" style="border-left-style: none;border-right-style: none;border-top-style: none;color: dodgerblue" type="text" 
+                                            [(ngModel)]="filterEmail">
+                                    </th>
+                                    <th class="font_light isHeadingInputList">
+                                        <p _ngcontent-c1="">Mobile Number<i class="fa fa-fw fa-file"></i></p>
+                                        <input _ngcontent-c1="" class="form-control" id="" name="" placeholder="Mobile Number" (change)="filterInvoiceList()" style="border-left-style: none;border-right-style: none;border-top-style: none;color: dodgerblue;" type="text" 
+                                            [(ngModel)]="filterMobileNumber">
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+            </div>
+            <br>
+            <div class="box-body isUserListScroll">
+                <div class="box-body table_bg" style="border: 1px solid #ccc;
+                        border-bottom: 0px;
+                        border-radius: 10px 10px 0 0;
+                        padding-right: 30px;
+                        ">
+                    <table class="table table-hover font_d f_1" width="100%">
+                        <tbody>
+                            <tr class="border-none">
+                                <th class="border-none isemailDesign" width="18%">Email <span _ngcontent-c1="">
+                  <i _ngcontent-c1="" class="fa fa-fw fa fa-sort" (click)="sortUserList('email')"></i></span></th>
+                                <th class="border-none isCommonCenter" width="16%">Mobile Number <span _ngcontent-c1="">
+                  <i _ngcontent-c1="" class="fa fa-fw fa fa-sort" (click)="sortUserList('mobileNumber')"></i></span></th>
+                                <th class="border-none isCommonCenter" width="12%">Admin<span _ngcontent-c1="">
+                      <i _ngcontent-c1="" class="fa fa-fw fa fa-sort" (click)="sortUserList('isAdmin')"></i></span></th>
+                                <th class="border-none isCommonCenter" width="10%">Checker<span _ngcontent-c1="">
+                      <i _ngcontent-c1="" class="fa fa-fw fa fa-sort" (click)="sortUserList('isChecker')"></i></span></th>
+                                <th class="border-none isCommonCenter" width="10%">Approver<span _ngcontent-c1="">
+                    <i _ngcontent-c1="" class="fa fa-fw fa fa-sort" (click)="sortUserList('isApprover')"></i></span></th>
+                                <th class="border-none" width="10%">Default View<span _ngcontent-c1="">
+                    <i _ngcontent-c1="" class="fa fa-fw fa fa-sort" (click)="sortUserList('isBuyer')"></i></span></th>
+                                <th class="border-none isCommonCenter" width="10%">Select User
+                                    <!-- <span _ngcontent-c1=""><i _ngcontent-c1="" class="fa fa-fw fa fa-sort" ></i></span> -->
+                                </th>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="box-header table_bg no-padding" style="border: 1px solid #ccc;border-top: 0px;border-radius: 0px 0px 10px 10px;" id="invoiceTable">
+                    <div class="box-body">
+                        <table class="table table-hover font_d f_1" width="100%" style="border-collapse: separate;">
+                            <tbody *ngFor="let user of lstUsers">
+                                <tr class="b_left_4">
+                                    <td width="18%" class="isemailDesign">{{user.username}} <i [popover]="user.strCompanies" popoverOnHover="true" class="fa fa-fw fa-building"></i> </td>
+                                    <td width="16%" class="isCommonCenter">{{user.mobileNumber}} </td>
+                                    <td width="12%" class="isCommonCenter">{{(user.isAdmin)?'Yes':'No'}}</td>
+                                    <td width="10%" class="isCommonCenter">{{(user.isChecker)?'Yes':'No'}} </td>
+                                    <td width="10%" class="isCommonCenter">{{(user.isApprover)?'Yes':'No'}} </td>
+                                    <td width="10%" class="isCommonCenter">{{(user.isBuyer)?'Buyer':'Supplier'}} </td>
+                                    <td width="10%">
+                                        <div>
+                                            <!-- <input #dash type="checkbox" [(ngModel)]="user.selected" (change)="updateSelectedUsers(user,$event.target.checked)" style="height:13px"> -->
+                                            <ui-switch class="togglePadding" size="small" defaultBgColor="#f47564" color="rgb(153, 204, 102)" [(ngModel)]="user.selected" (change)="updateSelectedUsers(user,$event)" [disabled]="!listMode"></ui-switch>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr style="height: 5px"></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <br>
+            </div>
+            <div>
+                <div class="row isCommonTable">
+                    <div class="col-md-12 col-sm-12 box-body isCommonTableStyle isButtons" *ngIf="!listMode">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <h4>User Email</h4>
+                                <input [disabled]="disableUsername" type="text" [(ngModel)]="selectedUser.username" name="username" class="form-control" formControlName="username"  id="username" required>
+                                <h4>Password</h4>
+                                <input type="password" [(ngModel)]="selectedUser.password" name="password" class="form-control" id="name" required>
+                                <h4>Please Select</h4>
+                                <div class="isCkeckbox">
+                                    <h4>Admin</h4>
+                                    <input type="checkbox" [(ngModel)]="selectedUser.isAdmin">
+                                    <h4>Approver</h4>
+                                    <input type="checkbox" [(ngModel)]="selectedUser.isApprover">
+                                    <h4>Checker</h4>
+                                    <input type="checkbox" [(ngModel)]="selectedUser.isChecker">
+                                </div>
+                                <h4> Default Company </h4>
+                                <select _ngcontent-c1="" class="form-control" id="" name="dropdownCompanyLocations" style="border-left-style: none;border-right-style: none;border-top-style: none;color: dodgerblue" [(ngModel)]="defaultCompany">
+                                            <optgroup *ngFor="let company of lstAllCompanies">
+                                                <option _ngcontent-c1="" class="" value="{{company.id}}" selected>{{company.companyName}}</option>
+                                            </optgroup>
+                                        </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <h4> Mobile Number </h4>
+                                <input type="text" [(ngModel)]="selectedUser.mobileNumber" name="holidayDate" class="form-control" id="name" required>
+                                <h4> Default View </h4>
+                                <select [(ngModel)]="selectedUser.isBuyer" _ngcontent-c1="" class="form-control" style="border-left-style: none;border-right-style: none;border-top-style: none;color: dodgerblue">
+                                            <option value="true">Buyer</option>
+                                            <option value="false">Supplier</option>
+                                        </select>
+                                <h4> Link Companies with Account <br>(Press control and select multiple companies) </h4>
+                                <select multiple _ngcontent-c1="" class="form-control" id="" name="dropdownLinkedCompanies" style="height: 180px;border-left-style: none;border-right-style: none;border-top-style: none;color: dodgerblue" [(ngModel)]="linkedCompanies">
+                                            <optgroup *ngFor="let company of lstAllCompanies">
+                                                <option _ngcontent-c1="" class="" value="{{company.id}}" selected>{{company.companyName}}</option>
+                                            </optgroup>
+                                          </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 box-body isCommonTableStyle commonmargin">
+                        <div *ngIf="listMode" class="col-md-2" style="text-align:left;margin-top: 5px">
+                            <div class="group isButtonClick">
+                                <button class="btn btn-success" style="width:110%;font-size: 18px" (click)="addNewUser()">Add</button>
+                            </div>
+                        </div>
+                        <div *ngIf="listMode" class="col-md-2" style="text-align:left;margin-top: 5px">
+                            <div class="group isButtonClick">
+                                <button class="btn btn-success" style="width:110%;font-size: 18px" (click)="editSelectedUser()">Edit</button>
+                            </div>
+                        </div>
+                        <div *ngIf="listMode" class="col-md-2" style="text-align:left;margin-top: 5px">
+                            <div class="group isButtonClick">
+                                <button class="btn btn-success" style="width:110%;font-size: 18px" (click)="deleteSelectedUsers()">Remove</button>
+                            </div>
+                        </div>
+                        <div *ngIf="!listMode" class="col-md-2" style="text-align:left;margin-top: 5px">
+                            <div class="group isButtonClick">
+                                <button class="btn btn-success" style="width:110%;font-size: 18px" (click)="saveUser()">Save</button>
+                            </div>
+                        </div>
+                        <div *ngIf="!listMode" class="col-md-2" style="text-align:left;margin-top: 5px">
+                            <div class="group isButtonClick">
+                                <button class="btn btn-success" style="width:110%;font-size: 18px" (click)="listMode=!listMode">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <ngx-loading [show]="showWaiting"></ngx-loading>
+    </div>
+    <app-footer></app-footer>

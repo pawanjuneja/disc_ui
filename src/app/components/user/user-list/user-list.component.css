@@ -1,0 +1,50 @@
+.isCommonCenter {
+    text-align: center;
+}
+
+.isemailDesign {
+    padding-left: 15px;
+}
+
+.content-header-body {
+    padding: 0px 15px 0 15px;
+}
+
+.isCommonTableStyle {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding-right: 30px;
+    background: #f9f9f9;
+}
+
+.isCommonTable {
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.isCkeckbox {
+    display: flex;
+    align-items: baseline;
+    margin-left: 10px;
+}
+
+.menu_bg {
+    height: 109.5vh !important;
+}
+
+.isButtons {
+    margin-bottom: 30px;
+}
+
+.commonmargin {
+    margin-bottom: 30px;
+}
+
+.isButtonClick {
+    text-align: center;
+    margin-bottom: 7px;
+}
+
+.togglePadding{
+    padding-left: 28px;
+}

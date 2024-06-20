@@ -1,320 +1,437 @@
-<!DOCTYPE html>
-<html>
+<div class="wrapper">
 
-<head>
-
-</head>
-
-<body>
-    <div class="wrapper">
-        <!-- Sidebar  -->
-        <nav id="sidebar">
-            <div class="sidebar-header" style="text-align: center">
-                <!-- <h3>Supplier Sidebar</h3> -->
-                <a href="https://www.xpedize.com" target="_blank"><img src="../assets/xpd_logo_black.png" alt="xpd" class="img-responsive" height="100vh" width="200vw"></a>
+    <app-header title="Amount Under Offer" isSupplier="true"></app-header>
+    <div>
+        <supplier-sidebar></supplier-sidebar>
+    </div>
+    <div class="content-wrapper" id="demo1">
+        <section class="content-header">
+            <!-- <span class="f_01 pd_b_10">Amount Under Offer</span> -->
+            <div *ngIf="errorOccured">
+                <h3 style="color: red">{{errorMessage}}</h3>
             </div>
-
-            <ul class="list-unstyled components" id="sidenav">
-                <li>
-                    <a href="#" class="active"><span style="margin: 0px 5px"><i class="fa fa-list"></i></span> DashBoard</a>
-                </li>
-                <li>
-                    <a href="#"><span style="margin: 0px 5px"><i class="fa fa-truck"></i></span> Supplier View</a>
-                </li>
-                <li>
-                    <a href="#"><span style="margin: 0px 5px"><i class="fa fa-file-text" aria-hidden="true"></i></span> Invoice View</a>
-                </li>
-                <li>
-                    <a href="#"><span style="margin: 0px 5px"><i class="fa fa-list-ol" aria-hidden="true"></i></span> Offer View</a>
-                </li>
-            </ul>
-        </nav>
-
-        <!-- Page Content  -->
-        <div id="content">
-
-            <nav class="navbar navbar-expand-lg">
-                <div class="container-fluid">
-
-                    <button type="button" id="sidebarCollapse" class="btn btn-info" style="background-color: inherit;color: rgb(60, 79, 141);border: none;" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation" (click)="openSideNav()">
-                        <i class="fas fa-align-left"></i>
-                    </button>
-                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fas fa-align-justify"></i>
-                    </button>
-
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <!-- <ul class="nav navbar-nav ml-auto"> -->
-                            <!-- <li class="nav-item active">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
-                            <!-- <li class="nav-item">
-                                <a href="#" class="notification-icon"><i class="glyphicon glyphicon-bell"></i></a>
-                            </li> -->
-
-                            <!-- <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
-                            </li> -->
-                        <!-- </ul> -->
-                        <ul class="nav navbar-nav ml-auto">
-                            <li class="active nav-item ml-auto"><a href="#" class="nav-link"><i class="fa fa-bell fa-lg" aria-hidden="true"></i><span class="badge badge-pill badge-warning" style="vertical-align: top" data-toggle="dropdown">4</span></a></li>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have 10 notifications</li>
-                                <li>
-                                  <!-- inner menu: contains the actual data -->
-                                  <ul class="menu">
-                                    <li>
-                                      <a href="#">
-                                        <i class="fa fa-users text-aqua"></i> Lorem ipsum dolor sit amet
-                                      </a>
-                                    </li>
-                                  </ul></li></ul>
-                            <li></li>
-                            <li class="nav-item ml-auto">
-                               <a href="#" class="nav-link"><img src="../assets/ms_logo.png" alt="ms" height="30vh" width="30vw" class="img-responsive"></a>
-                            </li>
-
-                        </ul>
-
-                    </div>
-                </div>
-            </nav>
-           <div>
-            <h5 class="" style="text-align: left">DashBoard</h5>
-            <p style="font-size: 5px"  style="text-align: right"><b><b><span><i class="fa fa-list" aria-hidden="true"></i> </span> Home <span>></span> Dashboard</b></b></p>
-           </div>
-
-           <br>
-
-           <div class="container">
+        </section>
+        <section class="content" style="padding-bottom: 0px">
             <div class="row">
-                <!--  -->
-                <div class="col-md-3 col-sm-4 col-xs-6" id="first" style="margin: 5px 40px;border-radius: 10px;min-width: 21vw;padding: 20px 10px">
-                        <div style="text-align: left;float: left;color: white">
-
-                                <span style="font-size: 14px">Days Recieved Early</span>    <br>
-                                <span style="font-size: 20px">41</span>     <br>
-                                <span style="font-size: 14px">Amount Discounted (Till Date)</span>  <br>
-                                <span style="font-size: 20px">{{disAmount}}</span>  <br>
-
-                        </div>
-                        <div style="text-align: right;float: right;">
-                            <br>
-                            <span><img src="../assets/1.png" alt="x" height="60px"  width="60px" style="vertical-align: middle"></span>
-                            <br>
-                        </div>
-                </div>
-                <div class="col-md-3 col-sm-4 col-xs-6" style="margin: 5px 40px;min-width: 21vw;padding: 20px 10px;border-radius: 10px" class="bg bg-primary">
-                        <div style="text-align: left;float: left;color: white">
-
-                                    <span style="font-size: 12px">Amount Under Clearing</span>    <br>
-                                    <span style="font-size: 20px">{{netAmount}}</span>     <br>
-                                    <span style="font-size: 12px">Number Of Invoices</span>  <br>
-                                    <span style="font-size: 20px">{{noInv}}</span>  <br>
-
+                <!--Starting box1-->
+                <div class="col-md-4">
+                    <!-- Danger box -->
+                    <!--Saving acheived-->
+                    <div class="small-box bg-green">
+                        <a routerLink="/supplierDaysRecievedEarly" class="small-box-footer">
+                            <div class="row">
+                                <div class="col-lg-6 pd_l_10 text-left w_100">
+                                    <h4>Average Days Received Early </h4>
+                                    <span>{{suppierDashboardDto.daysReceivedEarly | number : '1.0-0'}}</span>
+                                    <h4>Invoice Amount Discounted ( Till Date )</h4>
+                                    <span>{{suppierDashboardDto.currencySymbol}}
+                                        {{suppierDashboardDto.amountDiscountedTillDate | number : '1.2-2'}}</span>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-fw fa-retweet"></i>
+                                </div>
                             </div>
-                            <div style="text-align: right;float: right;">
-                                <br>
-                                <span><img src="../assets/coins-money-stack.png" alt="x" height="60px"  width="60px" style="vertical-align: middle"></span>
-                                <br>
+                        </a>
+                    </div>
+                    <!-- /.box -->
+                    <!--/Saving acheived-->
+                </div>
+                <!--Ending box1-->
+                <!--starting Box 2--->
+                <div class="col-md-4">
+                    <!-- Primary box -->
+                    <div class="small-box bg-red">
+                        <a routerLink="/supplierUnderClearing" class="small-box-footer">
+                            <div class="row">
+                                <div class="col-lg-6 pd_l_10 text-left w_100">
+                                    <h4>Amount Under Clearing </h4>
+                                    <span>{{suppierDashboardDto.currencySymbol}}
+                                        {{suppierDashboardDto.amountUnderClearing | number : '1.2-2'}}</span>
+                                    <h4>Number Of Invoices</h4>
+                                    <span>{{suppierDashboardDto.numberOfInvoicesUnderClearning | number}}</span>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-fw fa-puzzle-piece"></i>
+                                </div>
                             </div>
-                </div>
-                <div class="col-md-3 sm-4 col-xs-6" style="background-color: limegreen;margin: 5px 40px;min-width: 21vw;padding: 20px 10px;border-radius: 10px">
-                        <div style="text-align: left;float: left;color: white">
-
-                                    <span style="font-size: 12px">Total Amount</span>    <br>
-                                    <span style="font-size: 20px">{{tAmount}}</span>     <br>
-                                    <span style="font-size: 12px">Total Invoices</span>  <br>
-                                    <span style="font-size: 20px">{{noInv}}</span>  <br>
-
-                            </div>
-                            <div style="text-align: right;float: right;">
-                                <br>
-                                <span><img src="../assets/invoice_icon_image.png" alt="x" height="60px"  width="60px" style="vertical-align: middle"></span>
-                                <br>
-                            </div>
-                </div>
-           </div>
-           <br>
-           <div class="row"  style="border-radius: 10px;border: 1px solid black;margin: 10px 10px;padding: 8px 0px;font-size: 14px">
-             <div class="col-md-2">
-               <div style="text-align:center;"><b>Location</b></div>
-               <div>
-                <select class="selectpicker form-control" [disabled]="iData" style="border:none;border-bottom-style:groove;background-color:inherit"
-                    name="dropdownCompanyLocations" [(ngModel)]="selectedLocation" (change)="getInvoicesForLocation($event.target.value)">
-                    <optgroup *ngFor="let location of lstCompanyLoations">
-                        <option value="{{location.id}}">{{location.name}}</option>
-                    </optgroup>
-                    <!-- <option>Manesar</option>
-                    <option value="">Pune</option>
-                    <option value="">Chennai</option> -->
-                </select>
-               </div>
-             </div>
-
-             <div class="col-md-3">
-                <div style="text-align:center;"><b>New Due Date</b></div>
-                <div class="input-group date" data-provide="datepicker">
-                  <input type="date" class="form-control" [(ngModel)]="date" [disabled]="iData" value="2011-01-13" style="border:none;border-bottom-style: groove;background-color:inherit">
-              </div>
-             </div>
-
-             <div class="col-md-3">
-                <div style="text-align:center;font-size: 17px"><b>Discount Percentage</b></div>
-                <div style="text-align:center;font-size: 13px">Per 30 Days</div>
-             </div>
-
-             <div class="col-md-2">
-                    <input type="number" class="input" style="width: 60px" min="0.00" max="100" [(ngModel)]="disPercent" style="border:none;border-bottom-style:groove;color:limegreen;font-size:17px;text-align: center;background-color:inherit" (change)="reset()"><span style="font-size:17px;"> <b> % </b> </span>
-             </div>
-
-           </div>
-           <div style="margin: 10px 10px;padding: 8px 0px;font-size: 14px">
-            <button class="btn btn-success" (click)="loadData()" style="float:left;font-size: 14px" *ngIf="!iData">Fetch Invoices</button>
-            <button class=" btn btn-danger" (click)="clearData()" style="float: left;font-size: 14px" *ngIf="iData">Clear Data</button>
-           </div>
-           <br>
-
-           <div class="container" style="border-radius: 10px;border: 1px solid black;margin: 10px 10px;font-size: 14px">
-            <div class="row" style="padding: 8px 0px">
-                <div class="col-md-2" style="text-align:center;border-right-style: groove">
-                    <div>Total Invoices</div>
-                    <div style="color:blue"><b>{{noInv}}</b></div>
-                </div>
-                <div class="col-md-2" style="text-align:center;border-right-style: groove">
-                  <div>Total Amount</div>
-                  <div style="color:blue"><b>INR {{tAmount}}</b></div>
-                </div>
-                <div class="col-md-1" style="text-align:center;border-right-style: groove">
-                  <h6>Due Date</h6>
-                  <div style="color:blue"><b>{{date | date:'shortDate'}}</b></div>
-                </div>
-                <div class="col-md-2" style="text-align:center;border-right-style: groove">
-                  <h6>Discount %</h6>
-                  <div style="color:blue"><b>{{disPercent}}</b></div>
-                </div>
-                <div class="col-md-2" style="text-align:center;border-right-style: groove">
-                    <h6>Discount Amount</h6>
-                    <div style="color:blue"><b>INR {{disAmount}}</b></div>
-                </div>
-                <div class="col-md-2" style="text-align:center;border-right-style: groove">
-                    <h6>Net Amount</h6>
-                    <div style="color:blue"><b>INR {{netAmount}}</b></div>
-                </div>
-                <div class="col-md-1" style="vertical-align:middle">
-                    <div>
-                        <button class="btn btn-success" style="font-size: 14px">Submit</button>
+                        </a>
                     </div>
                 </div>
-           </div>
-
-            <div class="container" style="background-color:lightgray;padding: 8px 0px;border: 1px solid black;margin: 5px 0px">
-                <div class="row" style="background-color: inherit;margin: 8px 15px">
-                    <div class="col-md-2" >
-                       <div><a><b>Invoice Number</b></a></div>
-
-                   </div>
-                   <div class="col-md-2">
-                        <div><b>Amount Due</b></div>
-                   </div>
-                   <div class="col-md-1">
-                        <div><b>Due Date</b></div>
-
-                   </div>
-                   <div class="col-md-2">
-                        <div><b>Discount %</b></div>
-
-                   </div>
-                   <div class="col-md-2">
-                       <div><b>Discount Amount</b></div>
-
-                   </div>
-                   <div class="col-md-2">
-                       <div><b>Net Amount</b></div>
-                   </div>
-                    <div class="col-md-1">
-                        <div><b>Select All</b></div>
-                   </div>
-               </div>
-
-               <div *ngIf="lstInvoices" class="ScrollStyle">
-                   <div *ngFor="let invoice of lstInvoices; let sr=index">
-                    <div class="row" id="fetchedInvoice">
-                        <div class="col-md-2" title="Invoice Name">
-                           <div>{{ sr+1 }}_{{invoice.invoiceNumber}}</div>
-
-                       </div>
-                       <div class="col-md-2" title="Amount Due">
-                            <div>{{invoice.totalTrasactionValue}}</div>
-
-                       </div>
-                       <div class="col-md-1" title="Due Date">
-                            <div>{{invoice.dueDate}}</div>
-                            <div><small></small></div>
-
-                       </div>
-                       <div class="col-md-2" title="Discount Percent">
-                            <div>{{invoice.discountAmount}}</div>
-
-                       </div>
-                       <div class="col-md-2" title="Discounted Amount">
-                           <div>{{invoice.discountAmount}}</div>
-
-                       </div>
-                       <div class="col-md-2" title="Amount Due">
-                           <div>{{invoice.totalTransactionValue - invoice.discountAmount}}</div>
-                       </div>
-                       <div class="col-md-1">
-                            <div *ngIf="i.sts === true" style="color: limegreen">
-                                <!-- <b>Selected</b> -->
-                                <label class="switch">
-                                    <input type="checkbox" checked>
-                                    <span class="slider round"></span>
-                                </label>
+                <!--Ending Box 2--->
+                <!--Starting Box 3--->
+                <div class="col-md-4">
+                    <!-- Success box -->
+                    <div class="small-box bg-yellow" routerLink="/supplier-dashboard">
+                        <a routerLink="/supplier-dashboard" class="small-box-footer act_yellow">
+                            <div class="row">
+                                <div class="col-lg-6 pd_l_10 text-left w_100">
+                                    <h4>Amount Under Offer</h4>
+                                    <span>{{suppierDashboardDto.currencySymbol}} {{suppierDashboardDto.totalAmount |
+                                        number : '1.2-2'}}</span>
+                                    <h4>Number Of Invoices</h4>
+                                    <span>{{suppierDashboardDto.totalInvoices | number}}</span>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-fw fa-book"></i>
+                                </div>
                             </div>
-                            <div *ngIf="i.sts === false" style="color: red">
-                                <!-- <b>Not Selected</b> -->
-                                <label class="switch">
-                                    <input type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                            </div>
-                       </div>
-                   </div>
-
-                   </div>
-               </div>
+                        </a>
+                    </div>
+                </div>
+                <!---Ending Box 3--->
             </div>
-
-           </div>
-
-           <br>
-           </div>
+            <!-- Main row -->
+            <div class="row">
+                <div class="col-lg-12 f_01 pd_b_10">Input Fields</div>
+                <section class="col-lg-12 connectedSortable">
+                    <form>
+                        <div class="box box-success border-none">
+                            <div class="box-header">
+                                <div class=" pd_t_15">
+                                    <div class="col-lg-2" style="text-align:left;margin-top: 5px">
+                                        <div class="group isHeadingInputList">
+                                            <p class="">Buyer<i class="fa fa-fw fa-building"></i></p>
+                                            <select _ngcontent-c1="" class="custom-select form-control selectBox" name="dropdownBuyerCompany" [(ngModel)]="selectBuyerCompanyId" (change)="changeBuyerCompany($event)" style="border-left-style: none;border-right-style: none;border-top-style: none;color:dodgerblue;">
+                                                <optgroup *ngFor="let buyer of lstBuyerCompanies">
+                                                    <option _ngcontent-c1="" value="{{buyer.id}}">{{buyer.companyName}}</option>
+                                                </optgroup>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2" style="text-align:left;margin-top: 5px">
+                                        <div class="group isHeadingInputList">
+                                            <p class="">Location<i class="fa fa-fw fa-map-marker"></i></p>
+                                            <select _ngcontent-c1="" class="custom-select form-control" id="" name="dropdownCompanyLocations" [(ngModel)]="selectedLocation" (change)="filterInvoiceList($event)" style="border-left-style: none;border-right-style: none;border-top-style: none;color:dodgerblue;">
+                                                <optgroup *ngFor="let location of selectBuyerCompany.orgMasters">
+                                                    <option value="{{location.id}}">{{location.name}}</option>
+                                                </optgroup>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2" style="text-align:left;margin-top: 5px">
+                                        <div class="group isHeadingInputList">
+                                            <p class="">Invoice Search<i class="fa fa-fw fa-file"></i></p>
+                                            <input _ngcontent-c1="" class="form-control" placeholder="Invoice Number" name="invoiceNumberText" id="invoiceNumberText" (change)="filterInvoiceList()" style="border-left-style: none;padding-left: 15px; border-right-style: none;border-top-style: none;color:dodgerblue;"
+                                                type="text" [(ngModel)]="invoiceNumberText">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2" style="text-align:center;margin-top: 5px">
+                                        <div _ngcontent-c1="">
+                                            <p _ngcontent-c1="" class="paymentDate" style="font-size:13px">New Payment Date<i class="fa fa-fw fa-calendar"></i></p>
+                                            <div class="f_blue" style="color:dodgerblue;margin-top: 17px;"><b>{{nextDueDate
+                                                    | date:'dd-MMM-yyyy'}}</b></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4" style="text-align:center">
+                                        <div class=" col-lg-6" style="vertical-align:middle">
+                                            <div class="col-lg-12 box-border-green">
+                                                <div class="input-group countPercentage">
+                                                    <input class="input_text_color color_green " [disabled]="fixedOffer" type="number" onkeydown="return false" [min]="minPercentage" [max]="maxPercentage" step="0.1" maxlength="1.1" [(ngModel)]="disPercent" name="discountPercentage" placeholder="Discount %"
+                                                        (mouseup)="updatePercentData($event.target.value)" title="Set Discount Percentage">
+                                                    <img src="/src/assets/image/percentage-image.png" />
+                                                </div>
+                                                <div style="border-top-style:solid;"><small>Per 30 Days</small></div>
+                                            </div>
+                                        </div>
+                                        <div class=" col-lg-6" style="align-content: center;vertical-align:middle;padding-top:20px;">
+                                            <div class="f_17">
+                                                <button class="btn btn-success isSubmitbtn" style="width:110%;font-size: 18px" [disabled]="disableSubmit" (click)="showConfirmationDialog()">Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+                <div class="col-lg-12 f_01 pd_b_10">Summary and Detailed View</div>
+                <section class="col-lg-12 connectedSortable">
+                    <div class="box box-success border-none">
+                        <div class="box-body table-responsive">
+                            <div class="isCommonScroll">
+                                <div class="box-body table-responsive group2 isResposive" style="border: 1px solid #ccc;
+              border-radius: 10px;
+              padding-right: 35px;
+              padding-left: 10px;">
+                                    <table class="table table-hover font_dd f_dd" width="100%">
+                                        <tbody>
+                                            <tr class="border-none">
+                                                <th width="14.28%" class="isalignItem">
+                                                    <div class="f_17">Total Invoices</div>
+                                                    <span class="f_blue text">{{totalInvoices | number}}</span>
+                                                </th>
+                                                <th width="14.28%" class="isalignItem">
+                                                    <div class="f_17">Total Amount ({{suppierDashboardDto.currencySymbol}})</div>
+                                                    <span class="f_blue">{{totalAmount | number : '1.2-2'}}</span>
+                                                </th>
+                                                <th width="14.28%" class="isalignItem">
+                                                    <div class="f_17">New Payment Date</div>
+                                                    <span class="f_blue">{{nextDueDate | date:'dd-MMM-yyyy'}}</span>
+                                                </th>
+                                                <th width="14.28%" style="padding-left:13px;" class="isalignItem">
+                                                    <div class="f_17">Abs. Discount %</div>
+                                                    <span class="f_blue">{{summaryDiscountPercent | number: '1.1-1'}} %</span>
+                                                </th>
+                                                <th width="15.28%" style="padding-left:18px;" class="isalignItem">
+                                                    <div class="f_17">Discount Amount ({{suppierDashboardDto.currencySymbol}})
+                                                    </div>
+                                                    <span class="f_blue">{{disAmount | number : '1.2-2'}}</span>
+                                                </th>
+                                                <th width="15.28%" style="padding-left:18px;" class="isalignItem">
+                                                    <div class="f_17">Net Amount ({{suppierDashboardDto.currencySymbol}})</div>
+                                                    <span class="f_blue">{{netAmount | number : '1.2-2'}}</span>
+                                                </th>
+                                                <th width="8%" style="text-align:left" style="padding-left:13px;" class="isalignItem">
+                                                    <div _ngcontent-c1="" class="text-center margin">
+                                                        <i class="material-icons" (click)="ngOnInit()" title="Refresh" style="cursor:pointer">
+                                                        refresh
+                                                    </i>
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="box-body table-responsive table_bg" style="
+                                    border: 1px solid #ccc;
+                                    border-bottom: 0px;
+                                    border-radius: 10px 10px 0 0;
+                                    padding: 0 26px;padding-left: 11px;
+                                    ">
+                                    <table class="table table-hover font_d f_1" width="100%">
+                                        <tbody>
+                                            <tr class="border-none">
+                                                <th class="border-none" width="15%">Invoice Number<i _ngcontent-c1="" class="fa fa-fw fa fa-sort" (click)="sortInvoiceList('InvoiceNumber')"></i>
+                                                    <div class="isCommon">Location</div>
+                                                </th>
+                                                <th class="border-none" width="15%">Amount Due<i _ngcontent-c1="" class="fa fa-fw fa fa-sort" (click)="sortInvoiceList('AmountDue')"></i></th>
+                                                <th class="border-none" width="15%">Due Date<i _ngcontent-c1="" class="fa fa-fw fa fa-sort" (click)="sortInvoiceList('DueDate')"></i>
+                                                    <div class="isCommon">Days Paid Early</div>
+                                                </th>
+                                                <th class="border-none" width="15%">Abs. Discount %
+                                                    <div class="isCommon">Disc. Per 30 Days</div>
+                                                </th>
+                                                <th class="border-none" width="15%">Discount Amount<i _ngcontent-c1="" class="fa fa-fw fa fa-sort" (click)="sortInvoiceList('DiscountAmount')"></i></th>
+                                                <th class="border-none" width="15%">Net Amount<i _ngcontent-c1="" class="fa fa-fw fa fa-sort" (click)="sortInvoiceList('NetAmount')"></i></th>
+                                                <th class="border-none" width="10%" id="sa">
+                                                    <span class="isbuyercenter">
+                                                    Select All
+                                                </span>
+                                                    <!-- <input type="checkbox" (change)="selectAllInvoices($event.target.checked)" [(ngModel)]="selectAllInvoice" style="height:13px;"> -->
+                                                    <ui-switch (change)="selectAllInvoices($event)" [(ngModel)]="selectAllInvoice" size="small" defaultBgColor="#f47564" color="rgb(153, 204, 102)" style="padding-left: 10px"></ui-switch>
+                                                </th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="box-header table_bg chat no-padding" style="border: 1px solid #ccc;border-top: 0px;border-radius: 0px 0px 10px 10px;" id="invoiceTable">
+                                    <div class="box-body table-responsive  ">
+                                        <table class="table table-hover font_d" width="100%" style="border-collapse: separate;">
+                                            <tbody *ngFor="let invoice of lstInvoicesDto | paginate: { itemsPerPage: 100, currentPage: p }">
+                                                <tr class="b_left_4">
+                                                    <td title="{{invoice.xpdInvoice.invoiceNumber}}" width="15%" class="border-left-test" [style.border-left-color]="returnStyle(invoice.xpdInvoice.selected)">{{invoice.xpdInvoice.invoiceNumber | shortenPipe}}
+                                                        <div class="isCommon" title="{{invoice.xpdInvoice.orgMasterName}}">{{ invoice.xpdInvoice.orgMasterName | shortenPipe}}
+                                                            <i *ngIf="invoice.notesSummary != null && invoice.notesSummary !== ''" title="" [popover]="myPopover" popoverOnHover="true" animation="true" class="fa fa-fw fa-info-circle bg_o_f_w"></i>
+                                                            <popover-content #myPopover title="Credit-Debit Note" placement="right" popoverOnHover="true" animation="true" class="text-danger"><span class="text-primary">{{invoice.notesSummary}}</span></popover-content>
+                                                            <i *ngIf="invoice.xpdInvoice.supplierDesc" title="" [popover]="myPopoverLastStatus" popoverOnHover="true" animation="true" class="fa fa-fw fa fa-bell-o bg_o_f_w"></i>
+                                                            <popover-content #myPopoverLastStatus title="Last Status" placement="right" popoverOnHover="true" animation="true" class="text-danger"><span class="text-primary">{{invoice.xpdInvoice.supplierDesc}}
+                                                                at <span style="color:#f47564">{{invoice.xpdInvoice.discountPercent30Days
+                                                                    | number : '1.2-2'}}%</span></span>
+                                                            </popover-content>
+                                                        </div>
+                                                        <td width="15%">{{invoice.xpdInvoice.currency}} {{invoice.actualAmountDue | number: '1.2-2'}}</td>
+                                                        <td width="15%">{{invoice.xpdInvoice.dueDate | date:'dd-MMM-yyyy'}}
+                                                            <div style="color: inherit" class="isCommon">{{invoice.daysRemaining}}</div>
+                                                        </td>
+                                                        <td width="15%">{{invoice.actualDiscountPercentage | number : '1.1-1'}} %
+                                                            <div style="color: inherit" class="isCommon">{{disPercent | number : '1.1-1'}} %</div>
+                                                        </td>
+                                                        <td width="15%">{{invoice.xpdInvoice.currency}} {{invoice.newDiscountAmount | number : '1.2-2'}}</td>
+                                                        <td width="15%">{{invoice.xpdInvoice.currency}} {{invoice.actualAmountDue - invoice.newDiscountAmount | number : '1.2-2'}}
+                                                        </td>
+                                                        <td width="10%">
+                                                            <div>
+                                                                <!-- <input #dash type="checkbox" [(ngModel)]="invoice.xpdInvoice.selected" (change)="selectCurrentRow(invoice, $event.target.checked)" style="height:13px"> -->
+                                                                <ui-switch #dash size="small" defaultBgColor="#f47564" color="rgb(153, 204, 102)" [(ngModel)]="invoice.xpdInvoice.selected" (change)="selectCurrentRow(invoice, $event)" style="padding-left: 10px" class="isUiSift2"></ui-switch>
+                                                            </div>
+                                                        </td>
+                                                </tr>
+                                                <tr style="height: 5px"></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </div>
+    <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':confirmationModel}">
+        <!-- modal-dialog -->
+        <div class="modal-dialog" role="document">
+            <!-- modal-content -->
+            <div class="modal-content">
+                <!-- modal-header -->
+                <div class="modal-header">
+                    <button type="button" class="close btn btn-danger" aria-label="Close" (click)="closeConfirmationDialog()"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" style="color:limegreen; font-size: 16px">Confirm Invoice Offer</h4>
+                </div>
+                <!-- modal-body -->
+                <div class="modal-body">
+                    <div>
+                        <div><span style="color:dodgerblue" class="f_01">You are about to submit {{
+                                this.selectedInvoices.length }} invoice(s) at {{ this.disPercent }} % <small>(Per 30
+                                    Days)</small>.Please confirm.</span>
+                            <div class="mar_tb_3">Summary</div>
+                            <table class="table table-bordered f_1" style="margin-bottom:0px">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <td scope="row"><b>Total Invoices</b></td>
+                                        <td scope="row"><b>Total Amount ({{suppierDashboardDto.currencySymbol}})</b></td>
+                                        <td scope="row"><b>New Payment Date</b></td>
+                                        <td scope="row"><b>Absolute Discount %</b></td>
+                                        <td scope="row"><b>Discount % Per 30 Days</b></td>
+                                        <td scope="row"><b>Discount Amount ({{suppierDashboardDto.currencySymbol}})</b></td>
+                                        <td scope="row"><b>Net Amount ({{suppierDashboardDto.currencySymbol}})</b></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td scope="row" title="Total Invoices">
+                                            {{totalInvoices | number}}
+                                        </td>
+                                        <td scope="row" title="Total Amount">
+                                            {{totalAmount | number : '1.2-2'}}
+                                        </td>
+                                        <td scope="row" title="New Payment Date">
+                                            {{nextDueDate | date:'dd-MMM-yyyy'}}
+                                        </td>
+                                        <td scope="row" title="Absolute Discount %">
+                                            {{summaryDiscountPercent | number: '1.1-1'}} %
+                                        </td>
+                                        <td scope="row" title="Discount % Per 30 Days">
+                                            {{disPercent | number: '1.1-1'}} %
+                                        </td>
+                                        <td scope="row" title="Discount Amount">
+                                            {{disAmount | number : '1.2-2'}}
+                                        </td>
+                                        <td scope="row" title="Net Amount">
+                                            {{netAmount | number : '1.2-2'}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="mar_tb_3">Detail Invoices</div>
+                            <div style="height:150px;overflow:auto">
+                                <table class="table table-bordered f_1">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <td scope="row"><b>Invoice Number</b></td>
+                                            <td scope="row"><b>Amount Due ({{suppierDashboardDto.currencySymbol}})</b></td>
+                                            <td scope="row"><b>Discount Amount ({{suppierDashboardDto.currencySymbol}})</b></td>
+                                            <td scope="row"><b>Net Amount ({{suppierDashboardDto.currencySymbol}})</b></td>
+                                            <td scope="row"><b>Original Due Date</b></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let invoice of selectedInvoices">
+                                            <td scope="row" title="Total Invoices" title="{{invoice.xpdInvoice.invoiceNumber}}">
+                                                {{invoice.xpdInvoice.invoiceNumber | shortenPipe}}
+                                            </td>
+                                            <td scope="row">
+                                                {{invoice.actualAmountDue | number: '1.2-2'}}
+                                            </td>
+                                            <td scope="row">
+                                                {{invoice.newDiscountAmount | number : '1.2-2'}}
+                                            </td>
+                                            <td scope="row">
+                                                {{invoice.actualAmountDue - invoice.newDiscountAmount | number : '1.2-2'}}
+                                            </td>
+                                            <td scope="row">
+                                                {{invoice.xpdInvoice.dueDate | date:'dd-MMM-yyyy'}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-success" (click)="openModalDialog()">OK</button> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-success" (click)="closeConfirmationDialog ()">Cancel</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
-    <footer class="footer text-right bg-inverse" title="Copyright © 2018-2019 Xpedize. All rights reserved.">
-         <p >Copyright © 2018-2019 <strong>Xpedize</strong>. <small> All rights reserved.</small></p>
-      </footer>
-
-
-    <!-- jQuery CDN - Slim version (=without AJAX) -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <!-- Popper.JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-    <!-- Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-
-        <!--<script type="text/javascript">-->
-        <!--$(document).ready(function () {-->
-            <!--$('#sidebarCollapse').on('click', function () {-->
-                <!--$('#sidebar').toggleClass('active');-->
-            <!--});-->
-        <!--});-->
-        <!--</script>-->
-</body>
-
-</html>
+    <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':modelDisplay}">
+        <!-- modal-dialog -->
+        <div class="modal-dialog" role="document">
+            <!-- modal-content -->
+            <div class="modal-content">
+                <!-- modal-header -->
+                <div class="modal-header">
+                    <button type="button" class="close btn btn-danger" aria-label="Close" (click)="closeModalDialog()"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" style="color:limegreen; font-size: 16px">OTP Verification</h4>
+                </div>
+                <!-- modal-body -->
+                <div class="modal-body">
+                    <div *ngIf="incorrectOtp">
+                        <h5 style="color: red">{{otpErrorMessage}}. Please click <span (click)="openModalDialog()"><u>here</u></span> to generate again</h5>
+                    </div>
+                    <div>
+                        <div class="f_blue">OTP sent on registered Email Id and Mobile Number.<br> Please enter OTP to submit Offer on {{selectedInvoices.length}} invoice(s)</div>
+                    </div>
+                    <div>
+                        <input type="text" placeholder="Enter OTP" [(ngModel)]="otp" /><br />
+                        <button type="button" class="btn btn-success" (click)="checkOTPAndSubmitOffer()">Submit</button> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-success" (click)="closeModalDialog()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':showOfferedModal}">
+        <!-- modal-dialog -->
+        <div class="modal-dialog" role="document">
+            <!-- modal-content -->
+            <div class="modal-content">
+                <!-- modal-header -->
+                <div class="modal-header">
+                    <button type="button" class="close" aria-label="Close" (click)="closeOfferedInvoicesModalDialog()"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" style="color:limegreen; font-size: 16px">Summary</h4>
+                </div>
+                <!-- modal-body -->
+                <div class="modal-body" style="height: 250px;overflow: auto">
+                    <div style="font-size:14px">
+                        <p>Offer has been raised on <span class="dgrBlue"><b>{{ selectedInvoices.length }}</b></span> Invoice(s).
+                        </p>
+                        <p>Status: <span class="dgrBlue"><b>Submitted For Approval</b></span></p>
+                        <p>New Payment Date: <span class="dgrBlue"><b>{{nextDueDate | date:'dd-MMM-yyyy'}}</b></span></p>
+                        <p>Discount Percentage: <span class="dgrBlue"><b>{{disPercent | number : '1.1-1'}} %</b></span><small>(Per
+                                30 Days)</small></p>
+                        <p title="Absolute Discount Percentage">Abs. Discount Percentage: <span class="dgrBlue" title=""><b>{{summaryDiscountPercent
+                                    | number: '1.1-1'}} %</b></span></p>
+                        <p>Total Amount: <span class="dgrBlue">{{suppierDashboardDto.currencySymbol}} <b>{{totalAmount
+                                    | number : '1.2-2'}}</b></span></p>
+                        <p>Discount Amount: <span class="dgrBlue">{{suppierDashboardDto.currencySymbol}} <b>{{disAmount
+                                    | number : '1.2-2'}}</b></span></p>
+                        <p>Net Amount: <span class="dgrBlue">{{suppierDashboardDto.currencySymbol}} <b>{{netAmount |
+                                    number : '1.2-2'}}</b></span></p>
+                    </div>
+                </div>
+                <div style="padding-left: 10px; padding-bottom: 10px">
+                    <button type="button" class="btn btn-success" (click)="closeOfferedInvoicesModalDialog()">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ngx-loading [show]="showWaiting"></ngx-loading>
+</div>

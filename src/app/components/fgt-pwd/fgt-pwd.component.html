@@ -1,0 +1,88 @@
+<br>
+<div class="container">
+    <div class="row">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="text-center">
+                            <img src="./assets/image/xpd_original.jpg" class="responsive" alt="XPD" height="70%" width="60%">
+                            <h2 class="text-center">Forgot Password?</h2>
+                            <p [style.color]="msg==='Enter Username'|| msg === 'Password Changed Successfully...Redirecting to Login Page' ? 'limegreen' : 'orangered'"><b>{{ msg }}</b></p>
+                            <!-- <p *ngIf="msg !='Enter Username'" style="color:orangered"><b>{{ msg }}</b></p> -->
+                            <div class="panel-body">
+                                <div *ngIf="!cnfrmOtp">
+                                    <div class="row" *ngIf="didFail">
+                                        <div class="col-xs-12 col-sm-10 col-md-6 cold-sm-offset-1 col-md-offset-3 text-center">
+                                            <div class="alert alert-Success">OTP sent to registered Mobile Number</div>
+                                        </div>
+                                    </div>
+                                    <form class="form" (ngSubmit)="onSubmit()" #usrForm="ngForm">
+                                        <fieldset>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
+                                                    <input id="username" name="username" [(ngModel)]="un" placeholder="Username / Email" class="form-control" required autofocus>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <input class="btn btn-lg btn-success btn-block" value="Generate OTP" type="submit" [disabled]=usrForm.invalid>
+                                            </div>
+                                        </fieldset>
+                                        <br>
+                                        <div>© Xpedize Ventures Private Limited</div>
+                                        <div><a routerLink="/terms" target="_blank" style="color: blue">Terms and Conditions</a> | <a style="color: blue" target="_blank" routerLink="/privacy-policy">Privacy Policy</a></div>
+                                    </form>
+                                </div>
+
+                                <div *ngIf="cnfrmOtp">
+                                    <div class="row" *ngIf="didFail">
+                                        <div class="col-xs-12 col-sm-10 col-md-6 cold-sm-offset-1 col-md-offset-3 text-center">
+                                            <div class="alert alert-danger">Invalid Details</div>
+                                        </div>
+                                    </div>
+                                    <form class="form" (ngSubmit)="verifyOTP()" #usrForm="ngForm">
+                                        <fieldset>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
+                                                    <input id="username" name="username" [(ngModel)]="un" placeholder="Username / Email" class="form-control" required disabled>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-fw fa-comment"></i></span>
+                                                    <input type="text" id="otp" name="otp" pattern="[0-9]{6}" autocomplete="off" autofocus ngModel placeholder="Enter Your 6 Digit Verification Code" class="form-control" autofocus required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-fw fa-lock"></i></span>
+                                                    <input [type]="type" id="npwd" name="npwd" ngModel placeholder="Enter New Password" class="form-control" required oncopy="return false" onpaste="return false">
+                                                    <span class="input-group-addon" (click)="showHidePassword()" style="cursor:pointer"><span class="fa fa-eye"></span></span>
+                                                </div>
+                                                <div *ngIf="usrForm.value.npwd === ''"><span style="color: red">**</span> Password should be atleast 8 characters,include a number,a special character,an uppercase and a lowercase character. <span style="color: red">**</span></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-fw fa-lock"></i></span>
+                                                    <input type="password" id="cpwd" name="cpwd" ngModel placeholder="Confirm New Password" class="form-control" required oncopy="return false" onpaste="return false">
+                                                </div>
+                                            </div>
+                                            <div *ngIf="usrForm.value.npwd!== usrForm.value.cpwd" style="color:orange">Passwords do not match!</div>
+                                            <div class="form-group">
+                                                <input class="btn btn-lg btn-success btn-block" value="Change Password" type="submit" [disabled]="usrForm.invalid || (usrForm.value.npwd !== usrForm.value.cpwd)">
+                                            </div>
+                                        </fieldset>
+                                        <br>
+                                        <div>© Xpedize Ventures Private Limited</div>
+                                        <div><a routerLink="/terms" target="_blank" style="color: blue">Terms and Conditions</a> | <a style="color: blue" target="_blank" routerLink="/privacy-policy">Privacy Policy</a></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

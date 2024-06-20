@@ -1,0 +1,190 @@
+<div class="wrapper">
+    <app-header title="Savings Achieved"></app-header>
+
+    <buyer-sidebar></buyer-sidebar>
+
+    <div class="content-wrapper" id="demo1">
+        <section class="content-header">
+            <div *ngIf="errorOccured">
+                <h3 style="color: red">{{errorMessage}}</h3>
+            </div>
+            <!-- <ol class="breadcrumb">
+        <li><a class="a_link"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Dashboard</li>
+      </ol> -->
+        </section>
+        <section class="content">
+            <!-- Buyer Dashboard Component here....! -->
+            <buyer-dashboard [buyerDashboardDto]="buyerDashboardDto"></buyer-dashboard>
+
+            <div class="row">
+
+                <div class="col-lg-12 f_01 pd_b_10">Summary</div>
+
+
+                <section>
+                    <div class="col-lg-12 connectedSortable">
+                        <form>
+                            <div class="box box-success border-none">
+                                <div class="box-header">
+                                    <div style="float: left; width: 100%" id="bd_left">
+                                        <div class="col-lg-2 text-center">
+                                            <div class="f_17">Total Suppliers</div>
+                                            <span class="f_green">{{totalSupplier}}</span>
+                                        </div>
+                                        <div class="col-lg-2 text-center">
+                                            <div class="f_17">Total Invoices</div>
+                                            <span class="f_green">{{totalInvoices}}</span>
+                                        </div>
+                                        <div class="col-lg-2 text-center isCurrencyStyle">
+                                            <div class="f_17">Total Amount ({{buyerDashboardDto.currencySymbol}})</div>
+                                            <span class="f_green">{{totalAmount | number : '1.2-2'}}</span>
+                                        </div>
+                                        <div class="col-lg-2 text-center">
+                                            <div class="f_17">Average APR</div>
+                                            <span class="f_green">{{averageAPR | number : '1.2-2'}} %</span>
+                                        </div>
+                                        <div class="col-lg-2 text-center isCurrencyStyle buyerCurrSymb">
+                                            <div class="f_17">Discount Amount ({{buyerDashboardDto.currencySymbol}})</div>
+                                            <span class="f_green"> {{disAmount | number: '1.2-2'}}</span>
+                                        </div>
+                                        <div class="col-lg-2 text-center isCurrencyStyle">
+                                            <div class="f_17">Net Amount ({{buyerDashboardDto.currencySymbol}})</div>
+                                            <span class="f_green">{{netAmount | number:'1.2-2'}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+            <div class="row">
+
+                <div class="col-lg-12 f_01 pd_b_10">Detailed view</div>
+
+
+
+                <section class="col-lg-12 connectedSortable">
+                    <div class="box box-success border-none">
+                        <div class="box-body table-responsive">
+                            <div class="isCommonScroll">
+                                <div class="box-body table-responsive group2 isFixedwidth" style="border: 1px solid #ccc;
+                border-radius: 10px;
+                padding-right: 35px;
+                padding-left: 10px;">
+                                    <table class="table table-hover font_d" width="100%">
+                                        <tbody>
+                                            <tr class="border-none f_1">
+                                                <th class="font_light isHeadingInputList">
+                                                    <p>Location<i class="fa fa-fw fa-map-marker"></i></p>
+                                                    <select name="dropdownCompanyLocations" id="" class="form-control" style="border-left-style: none;border-right-style: none;border-top-style: none;color:dodgerblue;" [(ngModel)]="selectedLocation">
+                                        <optgroup *ngFor="let location of lstCompanyLocations">
+                                            <option value="{{location.name}}">{{location.name}}</option>
+                                        </optgroup>
+                                    
+                                  </select>
+                                                </th>
+                                                <th class="font_light isHeadingInputList">
+                                                    <p>Supplier Search<i class="fa fa-fw fa-user"></i></p>
+                                                    <input type="text" name="" placeholder="Supplier Name" id="" class="form-control" style="border-left-style: none;border-right-style: none;border-top-style: none;color:dodgerblue;" [(ngModel)]="supplierFilterText">
+                                                </th>
+                                                <th class="font_light isHeadingInputList">
+                                                    <p>Invoice Search<i class="fa fa-fw fa-file"></i></p>
+                                                    <input type="text" name="" placeholder="Invoice Number" id="" class="form-control" style="border-left-style: none;border-right-style: none;border-top-style: none;color:dodgerblue;" [(ngModel)]="invoiceNumberText">
+                                                </th>
+                                                <th class="font_light isHeadingInputList" title="From Payment Date">
+                                                    <p>Start Date<i class="fa fa-fw fa-calendar"></i></p>
+                                                    <input class="form-control" type="date" name="bday" style="border-left-style: none;border-right-style: none;border-top-style: none;color:dodgerblue;" [(ngModel)]="filterStartDate">
+                                                </th>
+                                                <th class="font_light isHeadingInputList" title="To Payment Date">
+                                                    <p style="position: relative">End Date<i class="fa fa-fw fa-calendar"></i></p>
+                                                    <input class="form-control" type="date" name="bday" style="border-left-style: none;border-right-style: none;border-top-style: none;color:dodgerblue;" [(ngModel)]="filterEndDate">
+                                                </th>
+                                                <th class="font_light isRefereshandGoButton">
+                                                    <!-- <button class="btn btn-success" (click)="ngOnInit()" title="Refresh" style="margin-bottom: 10px;margin-top: -15px;"><i class="fa fa-refresh f_01"></i></button> -->
+                                                    <i class="material-icons" (click)="ngOnInit()" title="Refresh">
+                                            refresh
+                                          </i>
+                                                    <button (click)="loadInvoices()" class="btn btn-success" title="Get Invoices">Go</button>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="box-body table-responsive table_bg isFixedwidth1" style="border: 1px solid #ccc;
+                          border-bottom: 0px;
+                          border-radius: 10px 10px 0 0;
+                          padding-right: 30px;
+                          ">
+                                    <table class="table table-hover font_d f_1" width="100%">
+                                        <tbody>
+                                            <tr class="border-none">
+                                                <th class="border-none" width="11%">Supplier <span _ngcontent-c1="">
+                    <i _ngcontent-c1="" class="fa fa-fw fa fa-sort" (click)="sortInvoiceList('Supplier')"></i></span></th>
+                                                <th class="border-none" width="11%">Invoice <span _ngcontent-c1="">
+                    <i _ngcontent-c1="" class="fa fa-fw fa fa-sort" (click)="sortInvoiceList('InvoiceNumber')"></i></span></th>
+                                                <th class="border-none" width="15%">Original Due Date <span _ngcontent-c1="">
+                    <i _ngcontent-c1="" class="fa fa-fw fa fa-sort" (click)="sortInvoiceList('OriginalDueDate')"></i></span></th>
+                                                <th class="border-none" width="12.5%">
+                                                    Payment Date <span _ngcontent-c1="">
+                    <i _ngcontent-c1="" class="fa fa-fw fa fa-sort" (click)="sortInvoiceList('PaymentDate')"></i></span>
+                                                </th>
+                                                <th class="border-none" width="14%">Invoice Amount <span _ngcontent-c1=""><i _ngcontent-c1=""
+                                                                                                   class="fa fa-fw fa fa-sort" (click)="sortInvoiceList('InvoiceAmount')"></i></span>
+                                                    <div class="isCommon">Location</div>
+                                                </th>
+                                                <th class="border-none" width="11%">APR %<span _ngcontent-c1=""><i _ngcontent-c1=""
+                                                                                             class="fa fa-fw fa fa-sort" (click)="sortInvoiceList('DiscountPercent')"></i></span></th>
+                                                <th class="border-none" width="14.5%">Discount Amount <span _ngcontent-c1=""><i _ngcontent-c1=""
+                                                                                             class="fa fa-fw fa fa-sort" (click)="sortInvoiceList('DiscountAmount')"></i></span></th>
+                                                <th class="border-none" width="11%">Net Amount <span _ngcontent-c1=""><i _ngcontent-c1=""
+                                                                                               class="fa fa-fw fa fa-sort" (click)="sortInvoiceList('NetAmount')"></i></span></th>
+
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="box-header table_bg chat no-padding isDetailsFixedWidth" style="border: 1px solid #ccc;border-top: 0px;border-radius: 0px 0px 10px 10px;" id="invoiceTable">
+                                    <div class="box-body table-responsive  ">
+                                        <table class="table table-hover font_d f_1" width="100%" style="border-collapse: separate;">
+                                            <tbody *ngFor="let invoice of lstInvoices | paginate: { itemsPerPage: 100, currentPage: p }">
+                                                <tr class="b_left_4">
+                                                    <td width="11%" class="border-left-green" title="{{ invoice.xpdInvoice.companyName }}">{{invoice.xpdInvoice.companyName | shortenPipe}}</td>
+                                                    <td width="11%" title="{{invoice.xpdInvoice.invoiceNumber}}">{{invoice.xpdInvoice.invoiceNumber | shortenPipe}}
+                                                        <!-- <span *ngIf="invoice.notesSummary != null && invoice.notesSummary !== ''" [title]="invoice.notesSummary" class="fa fa-fw fa-info-circle bg_o_f_w"></span> -->
+                                                        <i *ngIf="invoice.notesSummary != null && invoice.notesSummary !== ''" title="" [popover]="myPopover" popoverOnHover="true" animation="true" class="fa fa-fw fa-info-circle bg_o_f_w"></i>
+                                                        <popover-content #myPopover title="Credit-Debit Note" placement="right" popoverOnHover="true" animation="true" class="text-danger"><span class="text-primary">{{invoice.notesSummary}}</span></popover-content>
+                                                    </td>
+                                                    <td width="15%">{{invoice.xpdInvoice.dueDate | date:'dd-MMM-yyyy'}}
+                                                    </td>
+                                                    <td width="12.5%">{{invoice.xpdInvoice.clearingDate | date: 'dd-MMM-yyyy'}}</td>
+                                                    <td width="14%">{{invoice.xpdInvoice.currency}} {{invoice.xpdInvoice.dueAmount | number : '1.2-2'}}
+                                                        <div title="{{invoice.xpdInvoice.orgMasterName}}" class="isCommon">{{invoice.xpdInvoice.orgMasterName | shortenPipe}}</div>
+                                                    </td>
+                                                    <td width="11%">{{invoice.xpdInvoice.annualPercentage | number : '1.2-2'}} %</td>
+                                                    <td width="14.5">{{invoice.xpdInvoice.currency}} {{invoice.xpdInvoice.discountAmount | number : '1.2-2'}}</td>
+                                                    <td width="11%">
+                                                        {{invoice.xpdInvoice.currency}} {{invoice.xpdInvoice.netAmount | number : '1.2-2'}}
+                                                    </td>
+
+                                                </tr>
+                                                <tr style="height: 5px"></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+
+
+        <ngx-loading [show]="showWaiting"></ngx-loading>
+    </div>
+    <app-footer></app-footer>

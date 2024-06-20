@@ -1,0 +1,11 @@
+.buyerCurrSymb {
+    padding: 0;
+}
+
+.isCommnetSubmitButtonverticalCenter {
+    padding: 23px 0px 0px 0px;
+}
+
+.isCommnetSubmitButtonverticalCenter>button {
+    width: 100%;
+}

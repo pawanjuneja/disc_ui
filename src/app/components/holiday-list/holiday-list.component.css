@@ -1,0 +1,19 @@
+.isCommonRemoveLeftPadding {
+    padding-left: 0;
+}
+
+.isCommonRemoveLeftRightPadding {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.isSelectOption {
+    border-left-style: none;
+    border-right-style: none;
+    border-top-style: none;
+    color: dodgerblue;
+}
+
+.table-responsive {
+    padding-left: 15px;
+}

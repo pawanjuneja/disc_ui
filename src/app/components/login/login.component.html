@@ -1,0 +1,62 @@
+<div>
+
+    <div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true" style="overflow:auto">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div style="text-align:center" class="isLogoImg">
+                        <!-- <div class="col-lg-6" style="padding-top:1%">
+                <img src="../../../assets/new_logo.png" class="responsive" alt="JBML" height="70%" width="70%">
+              </div> -->
+                        <!-- <div class="col-lg-6"> -->
+                        <img src="./assets/image/xpd_original.jpg" class="responsive" alt="Xpedize" height="50%" width="50%">
+                        <!-- </div> -->
+                    </div>
+                    <div *ngIf="didFail" class="col-xs-12 col-sm-10 col-md-6 cold-sm-offset-1 col-md-offset-3 text-center">
+                        <div class="" style="background-color:rgb(235, 62, 31);color:white">Invalid Username/Password</div>
+                        <br>
+                    </div>
+
+                    <form class="form" (ngSubmit)="onSubmit()" #usrForm="ngForm">
+                        <div class="form-group">
+                            <input type="text" id="username" name="username" ngModel class="form-control input-lg" autofocus placeholder="Username / Email" required>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input [type]="type" id="password" name="password" ngModel required class="form-control input-lg" placeholder="Password">
+                                <span class="input-group-addon" (click)="showHidePassword()" style="cursor:pointer"><span class="fa fa-eye"></span></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-success btn-lg btn-block" type="submit" [disabled]="usrForm.invalid"><b>Log In</b></button>
+                            <br>
+                            <span style="text-align:center;float: left;"><a routerLink="/forgot-password" style="color:blue">Forgot Password?</a></span>
+                            <span style="float:right" class="text-warning"><small>This site is best viewed on Chrome</small></span>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="col-md-12 isCompanyInfo">
+                        <div style="float:left" class="isCompanyName">© Xpedize Ventures Private Limited</div>
+                        <div class="isModal-footer">
+                            <a routerLink="/terms" target="_blank" style="color: blue">Terms and Conditions</a> | <a style="color: blue" class="isPrivacy" target="_blank" routerLink="/privacy-policy">Privacy Policy</a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div style="float:left" class="contactInfo">
+                            Contact Us :
+                            <a href="mailto:info@xpedize.com" style="color: blue">
+                                <b>info@xpedize.com</b>
+                            </a>
+                            <span class="ispipe">|</span>
+                            <b>+91 9810325445</b>
+                            <span>|</span>
+                            <b>+91 9820670506</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

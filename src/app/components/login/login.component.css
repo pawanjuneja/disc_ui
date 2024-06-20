@@ -1,0 +1,62 @@
+.a_link :hover {
+    cursor: pointer;
+}
+
+.isCompanyInfo {
+    margin-bottom: 28px;
+}
+
+.contactInfo>span {
+    margin: 0 8px;
+    color: gray;
+}
+
+
+/*
+@auth: Vinay Kumar
+@Desc: For Login Modal Responsive When user login 
+
+*/
+
+@media only screen and (max-width: 768px) {
+    .modal-content {
+        height: 97vh;
+    }
+    .modal-body {
+        padding-top: 85px;
+    }
+    .isLogoImg>img {
+        width: 275px;
+    }
+    .isCompanyName {
+        float: none !important;
+        text-align: center;
+        font-size: 18px;
+    }
+    .text-warning>small {
+        font-size: 14px;
+    }
+    .isModal-footer {
+        display: flex;
+        justify-content: center;
+    }
+    .isModal-footer>a {
+        margin-right: 5px;
+    }
+    .isPrivacy {
+        margin-left: 5px;
+    }
+    .isCompanyInfo {
+        margin-bottom: 10px;
+    }
+    .contactInfo {
+        float: none !important;
+        text-align: center;
+    }
+    .contactInfo>a {
+        display: inherit;
+    }
+    .ispipe {
+        display: none;
+    }
+}

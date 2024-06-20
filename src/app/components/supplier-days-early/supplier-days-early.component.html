@@ -1,0 +1,293 @@
+<div class="wrapper">
+
+    <app-header title="Days Received Early" isSupplier="true"></app-header>
+
+    <supplier-sidebar></supplier-sidebar>
+    <!-- Right side column. Contains the navbar and content of the page -->
+    <div class="content-wrapper" id="demo1">
+        <section class="content-header">
+            <!-- <h1>
+        Dashboard
+        <small><span style="padding: 4px;border:#f47564 1px solid;border-radius: 8px">Days Received Early</span></small>
+      </h1> -->
+            <!-- <span class="f_01 pd_b_10">Days Received Early</span> -->
+            <!-- <span class="f_01 pd_b_10">Days Received Early</span> -->
+            <div *ngIf="errorOccured">
+                <h3 style="color: red">{{errorMessage}}</h3>
+            </div>
+            <!--      <ol class="breadcrumb">
+        <li><a class="a_link"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Dashboard</li>
+      </ol> -->
+        </section>
+
+        <section class="content">
+            <div class="row">
+                <!--Starting box1-->
+                <div class="col-md-4">
+                    <!-- Danger box -->
+                    <!--Saving acheived-->
+                    <div class="small-box bg-green">
+                        <a routerLink="/supplierDaysRecievedEarly" class="small-box-footer act_green">
+                            <div class="row">
+                                <div class="col-lg-6 pd_l_10 text-left w_100">
+                                    <h4>Average Days Received Early </h4>
+                                    <span>{{suppierDashboardDto.daysReceivedEarly | number: '1.1-1'}}</span>
+                                    <h4>Invoice Amount Discounted ( Till Date )</h4>
+                                    <span>{{suppierDashboardDto.currencySymbol}} {{suppierDashboardDto.amountDiscountedTillDate | number: '1.2-2'}}</span>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-fw fa-retweet"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- /.box -->
+                    <!--/Saving acheived-->
+                </div>
+                <!-- /.col -->
+                <!--Ending box1-->
+
+                <!--starting Box 2--->
+
+                <div class="col-md-4">
+                    <!-- Primary box -->
+                    <div class="small-box bg-red">
+                        <a routerLink="/supplierUnderClearing" class="small-box-footer">
+                            <div class="row">
+                                <div class="col-lg-6 pd_l_10 text-left w_100">
+                                    <h4>Amount Under Clearing </h4>
+                                    <span>{{suppierDashboardDto.currencySymbol}} {{suppierDashboardDto.amountUnderClearing | number: '1.2-2'}}</span>
+                                    <h4>Number Of Invoices</h4>
+                                    <span>{{suppierDashboardDto.numberOfInvoicesUnderClearning | number: '1.0-0'}}</span>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-fw fa-puzzle-piece"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+                <!--Ending Box 2--->
+
+                <!--Starting Box 3--->
+
+                <div class="col-md-4">
+                    <!-- Success box -->
+                    <div class="small-box bg-yellow">
+                        <a routerLink="/supplier-dashboard" class="small-box-footer">
+                            <div class="row">
+                                <div class="col-lg-6 pd_l_10 text-left w_100">
+                                    <h4>Amount Under Offer</h4>
+                                    <span>{{suppierDashboardDto.currencySymbol}} {{suppierDashboardDto.totalAmount | number: '1.2-2'}}</span>
+                                    <h4>Number Of Invoices</h4>
+                                    <span>{{suppierDashboardDto.totalInvoices | number: '1.0-0'}}</span>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-fw fa-book"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+                <!---Ending Box 3--->
+            </div>
+            <div class="row">
+                <div class="col-lg-12 f_01 pd_b_10">Input Fields</div>
+                <section class="col-lg-12 connectedSortable">
+                    <form>
+                        <div class="box box-success border-none">
+                            <div class="box-header">
+                                <div class=" pd_t_15">
+                                    <div class="col-lg-2">
+                                        <div class="group isHeadingInputList">
+                                            <p class="">Buyer<i class="fa fa-fw fa-building"></i></p>
+                                            <select _ngcontent-c1="" class="custom-select form-control" id="" name="dropdownBuyerCompany" [(ngModel)]="selectBuyerCompanyId" (change)="changeBuyerCompany($event)" style="border-left-style: none;border-right-style: none;border-top-style: none;color:dodgerblue;">
+  
+                        <optgroup *ngFor="let buyer of lstBuyerCompanies">
+                            <option _ngcontent-c1="" value="{{buyer.id}}">{{buyer.companyName}}</option>
+                        </optgroup>                       
+                        </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-2">
+                                        <div class="group isHeadingInputList">
+                                            <p class="">Location<i class="fa fa-fw fa-map-marker"></i></p>
+                                            <select _ngcontent-c1="" class="custom-select form-control" id="" name="dropdownCompanyLocations" [(ngModel)]="selectedLocation" style="border-left-style: none;border-right-style: none;border-top-style: none;color:dodgerblue;">
+
+                          <optgroup *ngFor="let location of selectBuyerCompany.orgMasters">
+                              <option _ngcontent-c1="" value="{{location.id}}">{{location.name}}</option>
+                          </optgroup>                       
+                          </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-2">
+                                        <div _ngcontent-c1="" class="isHeadingInputList">
+                                            <p _ngcontent-c1="">Invoice Search<i class="fa fa-fw fa-file"></i></p>
+                                            <input _ngcontent-c1="" class="form-control" placeholder="Invoice Number" name="invoiceNumberText" id="invoiceNumberText" style="border-left-style: none;border-right-style: none;border-top-style: none;color:dodgerblue;" type="text" [(ngModel)]="invoiceNumberText">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-2">
+                                        <div _ngcontent-c1="" class="isHeadingInputList">
+                                            <p _ngcontent-c1="">Start Date<i class="fa fa-fw fa-calendar isDates"></i></p>
+                                            <input _ngcontent-c1="" class="form-control" name="bday" style="border-left-style: none;border-right-style: none;border-top-style: none;color:dodgerblue;" type="date" [(ngModel)]="filterStartDate">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        <div class="col-md-8 isEndDate">
+                                            <div _ngcontent-c1="" class="isHeadingInputList">
+                                                <p _ngcontent-c1="">End Date<i class="fa fa-fw fa-calendar isDates"></i></p>
+                                                <input _ngcontent-c1="" class="form-control" name="bday" style="border-left-style: none;border-right-style: none;border-top-style: none;color:dodgerblue;" type="date" [(ngModel)]="filterEndDate">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 isEndDate">
+                                            <div _ngcontent-c1="" class="text-right margin position_a isEndDate">
+                                                <button (click)="loadInvoices()" class="btn btn-success isSubmitbtn" title="Get Invoices" style="margin-top:20px">Go</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="col-lg-2" style="text-align:center;margin-top: 5px;text-align: center;">
+                        <div _ngcontent-c1="" class="text-right margin position_a">
+                            <button (click)="loadInvoices()" class="btn btn-success" title="Get Invoices" style="margin-top:12px">Go</button>
+                        </div>
+                    </div> -->
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+
+            <div class="col-lg-12 f_01 pd_b_10" style="padding-left: 0">Summary and Detailed View</div>
+            <div class="row">
+                <section class="col-lg-12 connectedSortable">
+                    <div class="box box-success border-none">
+                        <div class="box-body table-responsive">
+                            <div class="isCommonScroll">
+                                <div class="box-body table-responsive group2 isFixedwidth" style="border: 1px solid #ccc;
+                border-radius: 10px;
+                padding-right: 35px;
+                padding-left: 10px;">
+                                    <table class="table table-hover font_dd f_dd" width="100%">
+                                        <tbody>
+                                            <tr class="border-none">
+                                                <th width="18%" class="isMobileContaintCenter">
+                                                    <div class="f_17">Total Invoices</div>
+                                                    <span class="f_blue">{{totalInvoices | number: '1.0-0'}}</span>
+                                                </th>
+                                                <th width="18%" class="isMobileContaintCenter">
+                                                    <div class="f_17">Total Amount ({{suppierDashboardDto.currencySymbol}})</div>
+                                                    <span class="f_blue">{{totalAmount | number: '1.2-2'}}</span>
+                                                </th>
+                                                <th width="18%" class="isMobileContaintCenter">
+                                                    <div class="f_17">Discount Amount ({{suppierDashboardDto.currencySymbol}})</div>
+                                                    <span class="f_blue">{{disAmount | number: '1.2-2'}}</span>
+                                                </th>
+                                                <th width="18%" class="isMobileContaintCenter">
+                                                    <div class="f_17">Net Amount ({{suppierDashboardDto.currencySymbol}})</div>
+                                                    <span class="f_blue">{{netAmount | number: '1.2-2'}}</span>
+                                                </th>
+                                                <th width="18%" class="isMobileContaintCenter">
+                                                    <div class="f_17">Absolute Discount %</div>
+                                                    <span class="f_blue">{{summaryDiscountPercent | number: '1.1-1'}} %</span>
+                                                </th>
+                                                <th width="10%" class="isMobileContaintCenter">
+                                                    <div _ngcontent-c1="" class="text-right margin position_a">
+                                                        <!-- <button class="btn btn-success" (click)="ngOnInit()" title="Refresh" style="margin-left:28px;margin-top: -5px"><i class="fa fa-refresh f_01"></i></button> -->
+                                                        <i class="material-icons" (click)="ngOnInit()" title="Refresh" style="cursor:pointer;padding-left: 10px">
+                                    refresh
+                                  </i>
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="box-body table-responsive table_bg isFixedwidth1" style="border: 1px solid #ccc;
+                          border-bottom: 0px;
+                          border-radius: 10px 10px 0 0;
+                          padding-right: 35px;
+                          padding-left: 10px;">
+                                    <table class="table table-hover font_d f_1" width="100%">
+                                        <tbody>
+                                            <tr class="border-none">
+                                                <th width="15%">Invoice Number<i _ngcontent-c1="" class="fa fa-fw fa fa-sort" (click)="sortInvoiceList('InvoiceNumber')"></i>
+                                                    <div class="isCommon">Date of Submission</div>
+                                                </th>
+                                                <th width="15%">Amount Due<i _ngcontent-c1="" class="fa fa-fw fa fa-sort" (click)="sortInvoiceList('AmountDue')"></i></th>
+                                                <th width="15%">Discount Amount<i _ngcontent-c1="" class="fa fa-fw fa fa-sort" (click)="sortInvoiceList('DiscountAmount')"></i>
+                                                    <div class="isCommon">Location</div>
+                                                </th>
+                                                <th width="15%">Net Amount<i _ngcontent-c1="" class="fa fa-fw fa fa-sort" (click)="sortInvoiceList('NetAmount')"></i></th>
+                                                <th width="15%" title="Absolute Discount %">Abs. Discount %<i _ngcontent-c1="" class="fa fa-fw fa fa-sort" (click)="sortInvoiceList('DiscountPercent')"></i>
+                                                    <div title="Discount % Per 30 Days" class="isCommon">Disc. Per 30 Days</div>
+                                                </th>
+                                                <th width="15%">Days Paid Early<i _ngcontent-c1="" class="fa fa-fw fa fa-sort" (click)="sortInvoiceList('DaysPaidEarly')"></i>
+                                                    <div class="isCommon">Payment Date</div>
+                                                </th>
+                                                <th width="10%">Status
+                                                    <!-- <i _ngcontent-c1="" class="fa fa-fw fa fa-sort" (click)="sortInvoiceList('Status')"></i> -->
+                                                </th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="box-body chat pd_t_0 table_bg isDetailsFixedWidth" id="chat-box" style="    border: 1px solid #ccc;
+    border-top: 0px;
+    border-radius: 0px 0px 10px 10px;" id="invoiceTable">
+                                    <div class="box-body table-responsive no-padding">
+                                        <table class="table table-hover font_d" width="100%" style="border-collapse: separate;">
+                                            <tbody *ngFor="let invoice of lstInvoices | paginate: { itemsPerPage: 100, currentPage: p }">
+                                                <tr class="b_left_4">
+                                                    <td width="15%" class="border-left-green" title="{{ invoice.xpdInvoice.invoiceNumber }}">{{invoice.xpdInvoice.invoiceNumber | shortenPipe}}
+                                                        <!-- <span *ngIf="invoice.notesSummary != null && invoice.notesSummary !== ''" [title]="invoice.notesSummary" class="fa fa-fw fa-info-circle bg_o_f_w"></span> -->
+                                                        <i *ngIf="invoice.notesSummary != null && invoice.notesSummary !== ''" title="" [popover]="myPopover" popoverOnHover="true" animation="true" class="fa fa-fw fa-info-circle bg_o_f_w"></i>
+                                                        <popover-content #myPopover title="Credit-Debit Note" placement="right" popoverOnHover="true" animation="true" class="text-danger"><span class="text-primary">{{invoice.notesSummary}}</span></popover-content>
+                                                        <div class="isCommon">{{invoice.xpdInvoice.submissionDate | date:'dd-MMM-yyyy'}}</div>
+                                                    </td>
+                                                    <td width="15%">{{invoice.xpdInvoice.currency}} {{invoice.xpdInvoice.dueAmount | number : '1.2-2'}}</td>
+                                                    <td width="15%">{{invoice.xpdInvoice.currency}} {{invoice.xpdInvoice.discountAmount | number: '1.2-2'}}
+                                                        <div title="{{invoice.xpdInvoice.orgMasterName}}" class="isCommon">{{invoice.xpdInvoice.orgMasterName | shortenPipe}}</div>
+                                                    </td>
+                                                    <td width="15%">{{invoice.xpdInvoice.currency}} {{invoice.xpdInvoice.netAmount | number: '1.2-2'}}</td>
+                                                    <td width="15%">{{invoice.xpdInvoice.appliedDiscount | number : '1.1-1'}}%
+                                                        <div class="isCommon">{{invoice.xpdInvoice.discountPercent30Days | number : '1.1-1'}}%</div>
+                                                    </td>
+                                                    <td width="15%">{{invoice.xpdInvoice.daysRemaining}} Days
+                                                        <div class="isCommon">{{invoice.xpdInvoice.clearingDate | date:'dd-MMM-yyyy'}}</div>
+                                                    </td>
+                                                    <td width="10%"><span class="label status-green">{{invoice.xpdInvoice.supplierDesc}}</span></td>
+                                                </tr>
+                                                <tr style="height: 5px"></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+
+        </section>
+
+
+    </div>
+    <ngx-loading [show]="showWaiting"></ngx-loading>
+    <app-footer></app-footer>
+</div>

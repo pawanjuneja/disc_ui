@@ -1,0 +1,14 @@
+.a_link :hover {
+    cursor: pointer;
+}
+
+.isHeadingInputList>p {
+    padding-left: 15px;
+}
+
+@media only screen and (max-width:767px) {
+    .isFixedwidth {
+        width: 1120px;
+        margin-bottom: 8px !important;
+    }
+}
